@@ -1,15 +1,43 @@
-import { Navbar } from '@/components/Navbar'
-import '@/styles/globals.css'
+import '../styles/globals.css';
+import '@rainbow-me/rainbowkit/styles.css';
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { polygon,polygonMumbai, fantomTestnet } from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
+import { Navbar } from '../components/Navbar';
 
-// import { WagmiConfig, createConfig } from "wagmi";
-// import { mainnet, polygon, optimism, polygonMumbai } from "wagmi/chains";
-// import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [
+    polygonMumbai,
+    fantomTestnet,
+    // polygon,
+    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
+  ],
+  [publicProvider()]
+);
 
-export default function App({ Component, pageProps }) {
+const { connectors } = getDefaultWallets({
+  appName: 'RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains,
+});
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient,
+  webSocketPublicClient,
+});
+
+function MyApp({ Component, pageProps }) {
   return (
-    <div>
-      <Navbar />
-      <Component {...pageProps} />
-    </div>
-  )
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains}>
+        <Navbar />
+        <Component {...pageProps} />
+      </RainbowKitProvider>
+    </WagmiConfig>
+  );
 }
+
+export default MyApp;
