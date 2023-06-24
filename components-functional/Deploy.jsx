@@ -13,13 +13,17 @@ export function DeployContract() {
         const provider = new ethers.providers.Web3Provider(connection)
         const signer = provider.getSigner();
         const contract = new ethers.Contract(address, abiFactory, signer);
-        const tx = await contract.hasDeployed(username.toString());
+        console.log(username.toString())
+        const tx = await contract.deployEventify(username.toString())
+        await tx.wait()
+        location.reload()
+        console.log("deployed")
     }
 
     return(
         <div className="flex flex-col">
         Deploy
-        <input className="text-black" name="username" placeholder="username" required onChange={e => {setUsername(e)}}/>
+        <input className="text-black" name="username" placeholder="username" required onChange={e => {setUsername(e.target.value)}}/>
         <button onClick={deploy}>Deploy Contract</button>
         </div>
     )

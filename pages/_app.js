@@ -2,22 +2,20 @@ import '../styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { polygon,polygonMumbai, fantomTestnet } from 'wagmi/chains';
+import { polygon, polygonMumbai, fantomTestnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { Navbar } from '../components/Navbar';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    polygonMumbai,
-    fantomTestnet,
     // polygon,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
+    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [polygonMumbai, fantomTestnet] : []),
   ],
   [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
+  appName: 'Eventify',
   projectId: 'YOUR_PROJECT_ID',
   chains,
 });
