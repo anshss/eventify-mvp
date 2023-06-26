@@ -49,13 +49,12 @@ export function CreateEvent() {
         const price = ethers.utils.parseEther(formInput.price);
         const tx = await contract.mintTicketsCall(price, formInput.supply, NftURI)
         await tx.wait()
-        location.reload()
         console.log("minted")
     }
 
     return (
         <div className="flex flex-col">
-            CreateEvent
+            CREATE EVENT
             <input
                 name="Name"
                 placeholder="Name"
@@ -116,7 +115,7 @@ export function CreateEvent() {
                 }
                 value={formInput.supply}
             />
-            <button onClick={mint}>MINT COLLECTION</button>
+            <button onClick={mint}>Mint Collection</button>
         </div>
     );
 }

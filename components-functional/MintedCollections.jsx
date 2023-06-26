@@ -6,6 +6,7 @@ import axios from "axios"
 
 export function MintedCollection(props) {
     const [mintedCollection, setMintedCollection] = useState([])
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         if(props.username) {
@@ -19,14 +20,15 @@ export function MintedCollection(props) {
         const provider = new ethers.providers.Web3Provider(connection)
         const signer = provider.getSigner();
         const contract = new ethers.Contract(address, abiFactory, signer);
-        const data = await contract.mintedEventsCall(props.username)
+        const data = await contract.fetchMintedTicketsCall(props.username)
         const items = await Promise.all(
             data.map(async (i) => {
-                const tokenUri = await contract.returnURI(props.username, i.tokenId.toString());
+                const tokenUri = await contract.uriCall(props.username, i.ticketId.toString());
+                console.log(tokenUri)
                 const meta = await axios.get(tokenUri);
                 let price = ethers.utils.formatEther(i.price);
                 let item = {
-                    tokenId: i.tokenId.toString(),
+                    tokenId: i.ticketId.toString(),
                     name: meta.data.name,
                     venue: meta.data.venue,
                     date: meta.data.name,
@@ -40,6 +42,7 @@ export function MintedCollection(props) {
         );
         console.log(items)
         setMintedCollection(items)
+        setLoaded(true)
         console.log("fetched")
     }
 
@@ -51,21 +54,20 @@ export function MintedCollection(props) {
             const provider = new ethers.providers.Web3Provider(connection)
             const signer = provider.getSigner();
             const contract = new ethers.Contract(address, abiFactory, signer);
-            const tx = await contract.hostCall(prop.tokenId)
+            const tx = await contract.publishTickets(prop.tokenId)
             await tx.wait()
-            location.reload()
         }
 
         return(
             <div className="text-black mb-5 mt-5">
                 <p>Nft card</p>
-                <p>Name: {prop.price}</p>
-                <p>Venue: {prop.supply}</p>
-                <p>Date: {prop.supply}</p>
+                <p>Name: {prop.name}</p>
+                <p>Venue: {prop.venue}</p>
+                <p>Date: {prop.date}</p>
                 <p>Supply: {prop.supply}</p>
-                <p>Price: {prop.supply}</p>
+                <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                {/* <button onClick={publishTickets(prop.tokenId)}>PUBLISH TICKETS</button> */}
+                <button onClick={() => publishTickets(prop.tokenId)}>Publish Tickets</button>
             </div>
         )
     }
@@ -74,9 +76,12 @@ export function MintedCollection(props) {
         console.log(mintedCollection)
     }
 
+    if (loaded == true && mintedCollection.length == 0) return (
+        <div>ACTIVE EVENTS <br /> No Tickets</div>
+    ) 
     return(
         <div>
-            Minted Collection
+            MINTED COLLECTION
             <div>
             {mintedCollection.map((nft, i) => {
                 return <NFTCard 
@@ -87,11 +92,11 @@ export function MintedCollection(props) {
                 date={nft.date}
                 supply={nft.supply}
                 price={nft.price}
-                // NftURI={nft.NftURI}
+                NftURI={nft.NftURI}
                 />
             } )}
             </div>
-            <button onClick={debug}>debug</button>
+            {/* <button onClick={debug}>debug</button> */}
         </div>
     )
 }

@@ -6,6 +6,7 @@ import { MintedCollection } from "./MintedCollections";
 import { address, abiFactory } from "../config";
 import web3modal from "web3modal";
 import { ethers } from "ethers";
+import { PausedEvents } from "./PausedEvents";
 
 export function DashboardComponent() {
 
@@ -26,13 +27,16 @@ export function DashboardComponent() {
         setUsername(tx)
     }
 
+    if (!username) return
+
     return (
         <div>
-            Dashboard
+            DASHBOARD
             <p>Username: {username}</p>
             <CreateEvent />
             <MintedCollection username={username}/>
             <ActiveEvents username={username} />
+            <PausedEvents username={username} />
             {/* <Domain /> */}
         </div>
     );
