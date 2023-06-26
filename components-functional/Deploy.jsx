@@ -7,17 +7,34 @@ export function DeployContract() {
 
     const [username, setUsername] = useState("")
 
-    async function deploy() {
+
+    async function getContract() {
         const modal = new web3modal();
         const connection = await modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection)
+        const provider = new ethers.providers.Web3Provider(connection);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(address, abiFactory, signer);
+        return contract
+    }
+
+    async function deploy() {
+        const usernameValidity = await checkUsernameValidity()
+        if (usernameValidity == false) {
+            console.log("username already exist")
+            return
+        }
+        const contract = await getContract()
         console.log(username.toString())
         const tx = await contract.deployEventify(username.toString())
         await tx.wait()
         location.reload()
         console.log("deployed")
+    }
+
+    async function checkUsernameValidity() {
+        const contract = await getContract()
+        const data = await contract.usernameExist(id);
+        return data
     }
 
     return(

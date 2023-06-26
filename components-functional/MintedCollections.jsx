@@ -77,7 +77,7 @@ export function MintedCollection(props) {
     }
 
     if (loaded == true && mintedCollection.length == 0) return (
-        <div>ACTIVE EVENTS <br /> No Tickets</div>
+        <div>MINTED COLLECTION <br /> No Tickets</div>
     ) 
     return(
         <div>

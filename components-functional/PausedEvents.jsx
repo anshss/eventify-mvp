@@ -76,7 +76,7 @@ export function PausedEvents(props) {
     }
 
     if (loaded == true && pausedEvents.length == 0) return (
-        <div>ACTIVE EVENTS <br /> No Tickets</div>
+        <div>PAUSED EVENTS <br /> No Tickets</div>
     )
 
     return (

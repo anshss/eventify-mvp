@@ -1,26 +1,31 @@
-const PolygonAddress = `0x17eC4F545D43225f5C7e3FA14d36a9a362B56bCD`
+const PolygonAddress = `0x2D3BE3f0860d8CDA8f0AE48A1b760EBFDa9cBFc7`
 
 export const address = PolygonAddress
 
 export const abiFactory = `
 [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "address",
-				"name": "owner",
+				"name": "user",
 				"type": "address"
 			},
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "address",
-				"name": "tokenContract",
+				"name": "contractAddress",
 				"type": "address"
 			}
 		],
-		"name": "EventifyCreated",
+		"name": "EventifyDeployed",
 		"type": "event"
 	},
 	{
@@ -40,6 +45,25 @@ export const abiFactory = `
 			}
 		],
 		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "by",
+				"type": "address"
+			}
+		],
+		"name": "UserWhitelisted",
 		"type": "event"
 	},
 	{
@@ -456,6 +480,25 @@ export const abiFactory = `
 				"type": "address"
 			}
 		],
+		"name": "isWhitelistOperator",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
 		"name": "isWhitelisted",
 		"outputs": [
 			{
@@ -553,6 +596,19 @@ export const abiFactory = `
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "setWhitelistOperator",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "newOwner",
 				"type": "address"
 			}
@@ -594,6 +650,25 @@ export const abiFactory = `
 				"type": "string"
 			}
 		],
+		"name": "usernameExist",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
 		"name": "usernamesToContractId",
 		"outputs": [
 			{
@@ -606,7 +681,13 @@ export const abiFactory = `
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
 		"name": "whitelistUser",
 		"outputs": [],
 		"stateMutability": "nonpayable",
