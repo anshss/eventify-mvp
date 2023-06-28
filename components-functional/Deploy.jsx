@@ -19,7 +19,7 @@ export function DeployContract() {
 
     async function deploy() {
         const usernameValidity = await checkUsernameValidity()
-        if (usernameValidity == false) {
+        if (usernameValidity == true) {
             console.log("username already exist")
             return
         }
@@ -33,7 +33,7 @@ export function DeployContract() {
 
     async function checkUsernameValidity() {
         const contract = await getContract()
-        const data = await contract.usernameExist(id);
+        const data = await contract.usernameExist(username.toString());
         return data
     }
 
