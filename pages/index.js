@@ -1,5 +1,8 @@
+import Hero from '../components/Hero'
 export default function Home() {
   return(
-    <div>Landing Page</div>
+    <div className="bg-background bg-hero-pattern">
+      <Hero/>
+    </div>
   )
 }
