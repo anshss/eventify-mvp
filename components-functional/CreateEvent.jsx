@@ -1,6 +1,6 @@
+'use client'
 import { useState } from "react";
-import { address, abiFactory } from "../config";
-import web3modal from "web3modal";
+import { getContract } from "../utils";
 import { ethers } from "ethers";
 import { Web3Storage } from 'web3.storage'
 
@@ -41,11 +41,7 @@ export function CreateEvent() {
 
     async function mint() {
         const NftURI = await formURI()
-        const modal = new web3modal();
-        const connection = await modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection)
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(address, abiFactory, signer);
+        const contract = await getContract(true)
         const price = ethers.utils.parseEther(formInput.price);
         const tx = await contract.mintTicketsCall(price, formInput.supply, NftURI)
         await tx.wait()

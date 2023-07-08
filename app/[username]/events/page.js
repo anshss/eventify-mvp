@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router'
+'use client'
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { address, abiFactory } from "../../config";
-import web3modal from "web3modal";
-import { ethers } from "ethers";
-import axios from "axios";
+import { checkUsernameValidity, fetchActiveEvents } from "../../../utils";
 
 export default function Events() {
-    const router = useRouter()
-    const { id } = router.query;
+
+    const pathName = usePathname();
+
+    const id = pathName?.split("/")[2];
 
     const [activeEvents, setActiveEvents] = useState([]);
     const [isUsernameValid, setIsUsernameValid] = useState(false)
@@ -15,56 +15,25 @@ export default function Events() {
 
     useEffect(() => {
         if (id) {
-            checkUsernameValidity();
+            checkUsernameValidityData();
         }
     }, [id]);
 
     useEffect(() => {
         if(isUsernameValid == true) {
-            fetchActiveEvents()
+            fetchActiveEventsData()
         }
     }, [isUsernameValid])
 
-    async function getContract() {
-        const modal = new web3modal();
-        const connection = await modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(address, abiFactory, signer);
-        return contract
-    }
 
-    async function checkUsernameValidity() {
-        const contract = await getContract()
-        const data = await contract.usernameExist(id);
-        console.log(data)
+    async function checkUsernameValidityData() {
+        const data = await checkUsernameValidity()
         setIsUsernameValid(data)
     }
 
-    async function fetchActiveEvents() {
-        const contract = await getContract()
-        const data = await contract.fetchActiveEventsCall(id.toString());
-        const items = await Promise.all(
-            data.map(async (i) => {
-                const tokenUri = await contract.uriCall(id, i.ticketId.toString());
-                console.log(tokenUri)
-                const meta = await axios.get(tokenUri);
-                let price = ethers.utils.formatEther(i.price);
-                let item = {
-                    ticketId: i.ticketId.toString(),
-                    name: meta.data.name,
-                    venue: meta.data.venue,
-                    date: meta.data.name,
-                    supply: i.supply.toNumber(),
-                    price,
-                    NftURI: tokenUri,
-                    // cover: meta.data.cover
-                };
-                return item;
-            })
-        );
-        console.log(items);
-        setActiveEvents(items);
+    async function fetchActiveEventsData() {
+        const data = await fetchActiveEvents()
+        setActiveEvents(data);
         setLoaded(true)
     }
 

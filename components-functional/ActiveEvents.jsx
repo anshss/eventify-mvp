@@ -1,65 +1,25 @@
+'use client'
 import { useEffect, useState } from "react";
-import { address, abiFactory } from "../config";
-import web3modal from "web3modal";
-import { ethers } from "ethers";
-import axios from "axios";
+import { fetchActiveEvents, pauseEvent } from "../utils";
 
 export function ActiveEvents(props) {
     const [activeEvents, setActiveEvents] = useState([]);
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        fetchActiveEvents();
+        fetchActiveEventsData();
     }, []);
 
-    async function getContract() {
-        const modal = new web3modal();
-        const connection = await modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(address, abiFactory, signer);
-        return contract
-    }
-
-    async function fetchActiveEvents() {
-        const contract = await getContract()
-        const data = await contract.fetchActiveEventsCall(props.username);
-        const items = await Promise.all(
-            data.map(async (i) => {
-                const tokenUri = await contract.uriCall(props.username, i.ticketId.toString());
-                console.log(tokenUri)
-                const meta = await axios.get(tokenUri);
-                let price = ethers.utils.formatEther(i.price);
-                let item = {
-                    ticketId: i.ticketId.toString(),
-                    name: meta.data.name,
-                    venue: meta.data.venue,
-                    date: meta.data.name,
-                    supply: i.supply.toNumber(),
-                    price,
-                    NftURI: tokenUri,
-                    // cover: meta.data.cover
-                };
-                return item;
-            })
-        );
-        console.log(items);
-        setActiveEvents(items);
+    async function fetchActiveEventsData() {
+        const data = await fetchActiveEvents()
+        setActiveEvents(data)
         setLoaded(true)
     }
 
     function NFTCard(prop) {
-        async function pauseEvent(ticketId) {
-            const contract = await getContract()
-            const tx = await contract.pauseActiveEventCall(ticketId)
-            await tx.wait()
+        async function pauseEventCall(ticketId) {
+            await pauseEvent(ticketId)
         }
-        // async function runEvent(ticketId) {
-        //     const contract = await getContract()
-        //     const tx = await contract.runPausedEventCall(ticketId)
-        //     await tx.wait()
-        //     location.reload()
-        // }
 
         return (
             <div className="text-black mb-5 mt-5">
@@ -70,7 +30,7 @@ export function ActiveEvents(props) {
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => pauseEvent(prop.ticketId)}>Pause</button>
+                <button onClick={() => pauseEventCall(prop.ticketId)}>Pause</button>
                 {/* <button onClick={() => runEvent(prop.tokenId)}>Run</button> */}
             </div>
         );
