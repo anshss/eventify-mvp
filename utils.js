@@ -20,7 +20,7 @@ export async function getContract(providerOrSigner) {
 }
 
 export async function getContractWithInfura() {
-    const provider = ethers.providers.JsonRpcProvider(
+    const provider = new ethers.providers.JsonRpcProvider(
         `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
     );
     const contract = new ethers.Contract(address, abiFactory, provider);
@@ -81,10 +81,11 @@ export async function fetchCommonInventory() {
 
 export async function fetchInventory() {
     const contract = await getContract();
-    const data = await contract.fetchActiveEventsCall(id.toString());
+    const address = await getUserAddress()
+    const data = await contract.fetchActiveEventsCall(address.toString());
     const items = await Promise.all(
         data.map(async (i) => {
-            const tokenUri = await contract.uriCall(id, i.ticketId.toString());
+            const tokenUri = await contract.uriCall(address, i.ticketId.toString());
             console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
