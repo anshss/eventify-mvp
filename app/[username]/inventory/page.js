@@ -17,10 +17,10 @@ export default function Inventory() {
     }, [id])
 
     async function fetchInventoryData() {
-        console.log(id)
         const data = await fetchInventory(id)
         setInventoryData(data)
         setLoaded(true)
+        console.log("user inventory: ", id)
     }
 
     if (loaded == false) return <div>Fetching..</div>

@@ -1,24 +1,25 @@
-'use client'
 import { useEffect, useState } from "react";
 import { fetchActiveEventsWithWalletProvider, pauseEvent } from "../utils";
 
 export function ActiveEvents(props) {
     const [activeEvents, setActiveEvents] = useState([]);
-    const [loaded, setLoaded] = useState(false)
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        fetchActiveEventsData();
+        if (props.username) {
+            fetchActiveEventsData();
+        }
     }, [props.username]);
 
     async function fetchActiveEventsData() {
-        const data = await fetchActiveEventsWithWalletProvider(props.username)
-        setActiveEvents(data)
-        setLoaded(true)
+        const data = await fetchActiveEventsWithWalletProvider(props.username);
+        setActiveEvents(data);
+        setLoaded(true);
     }
 
     function NFTCard(prop) {
         async function pauseEventCall(ticketId) {
-            await pauseEvent(ticketId)
+            await pauseEvent(ticketId);
         }
 
         return (
@@ -30,15 +31,22 @@ export function ActiveEvents(props) {
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => pauseEventCall(prop.ticketId)}>Pause</button>
+                <button onClick={() => pauseEventCall(prop.ticketId)}>
+                    Pause
+                </button>
                 {/* <button onClick={() => runEvent(prop.tokenId)}>Run</button> */}
             </div>
         );
     }
 
-    if (loaded == true && activeEvents.length == 0) return (
-        <div>ACTIVE EVENTS <br /> No Tickets</div>
-    )
+    if (loaded == false) return <div>Fetching..</div>;
+
+    if (loaded == true && activeEvents.length == 0)
+        return (
+            <div>
+                ACTIVE EVENTS <br /> No Events
+            </div>
+        );
 
     return (
         <div>

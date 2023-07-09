@@ -3,23 +3,23 @@ import { fetchPausedEvents, runEvent } from "../utils";
 
 export function PausedEvents(props) {
     const [pausedEvents, setPausedEvents] = useState([]);
-    const [loaded, setLoaded] = useState(false)
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        fetchPausedEventsData();
+        if (props.username) {
+            fetchPausedEventsData();
+        }
     }, [props.username]);
 
-
     async function fetchPausedEventsData() {
-        const data = await fetchPausedEvents(props.username)
-        setPausedEvents(data)
-        setLoaded(true)
+        const data = await fetchPausedEvents(props.username);
+        setPausedEvents(data);
+        setLoaded(true);
     }
 
     function NFTCard(prop) {
-
         async function runEventCall(ticketId) {
-            await runEvent(ticketId)
+            await runEvent(ticketId);
         }
 
         return (
@@ -37,9 +37,12 @@ export function PausedEvents(props) {
         );
     }
 
-    if (loaded == true && pausedEvents.length == 0) return (
-        <div>PAUSED EVENTS <br /> No Tickets</div>
-    )
+    if (loaded == true && pausedEvents.length == 0)
+        return (
+            <div>
+                PAUSED EVENTS <br /> No Tickets
+            </div>
+        );
 
     return (
         <div>

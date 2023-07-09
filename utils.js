@@ -231,7 +231,7 @@ export async function publishTickets(ticketId) {
 
 export async function fetchActiveEventsWithWalletProvider(username) {
     const contract = await getContract();
-    const data = await contract.fetchActiveEventsCall(username.toString());
+    const data = await contract.fetchActiveEventsCall(username);
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uriCall(

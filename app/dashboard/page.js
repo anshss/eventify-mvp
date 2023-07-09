@@ -1,16 +1,28 @@
 "use client";
 import { useEffect, useState } from "react";
 import { DeployContract } from "../../components-functional/Deploy";
-import { DashboardComponent } from "../../components-functional/Dashboard";
 import { fetchIfDeployed } from "../../utils";
+import { fetchUsername } from "../../utils";
+import { ActiveEvents } from "../../components-functional/ActiveEvents";
+import { CreateEvent } from "../../components-functional/CreateEvent";
+import { MintedCollection } from "../../components-functional/MintedCollections";
+import { PausedEvents } from "../../components-functional/PausedEvents";
+import { Domain } from "../../components-functional/Domain";
 
 export default function Dashboard() {
     const [isDeployed, setIsDeployed] = useState();
     const [loaded, setLoaded] = useState(false);
+    const [username, setUsername] = useState();
 
     useEffect(() => {
         checkDeployment();
     }, []);
+
+    useEffect(() => {
+        if (isDeployed == true) {
+            fetchUsernameData();
+        }
+    }, [isDeployed]);
 
     async function checkDeployment() {
         const data = await fetchIfDeployed();
@@ -18,7 +30,12 @@ export default function Dashboard() {
         setLoaded(true);
     }
 
-    if (loaded == false) return <div></div>;
+    async function fetchUsernameData() {
+        const data = await fetchUsername();
+        setUsername(data);
+    }
+
+    if (loaded == false) return <div>Fetching...</div>;
 
     if (!isDeployed)
         return (
@@ -29,7 +46,13 @@ export default function Dashboard() {
 
     return (
         <div>
-            <DashboardComponent />
+            DASHBOARD
+            <p>Username: {username}</p>
+            <CreateEvent />
+            <MintedCollection username={username} />
+            <ActiveEvents username={username} />
+            <PausedEvents username={username} />
+            {/* <Domain /> */}
         </div>
     );
 }

@@ -8,8 +8,9 @@ export default function Home() {
         <br />
         <Link href="/whitelist">Whitelist</Link>
         <Link href="/request/featured">Featured request</Link>
-        <Link href="/smashkx/events">Host-specific events</Link>
-        <Link href="/anshss/inventory">Host-specific inventory</Link>
+        <Link href="/anshss/events">Host-specific events</Link>
+        <Link href="/smashkx/inventory">Host-specific inventory</Link>
+        <p>(Host: anshss)</p>
       </div>
       
     )

@@ -35,6 +35,7 @@ export default function Events() {
         const data = await fetchActiveEvents(id)
         setActiveEvents(data);
         setLoaded(true)
+        console.log("user host: ", id)
     }
 
     function NFTCard(prop) {
