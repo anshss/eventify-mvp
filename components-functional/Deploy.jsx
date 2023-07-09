@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deploy } from "../../utils";
+import { deploy } from "../utils";
 
 export function DeployContract() {
 

@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
-import { fetchActiveEvents, pauseEvent } from "../utils";
+import { fetchActiveEventsWithWalletProvider, pauseEvent } from "../utils";
 
 export function ActiveEvents(props) {
     const [activeEvents, setActiveEvents] = useState([]);
@@ -8,10 +8,10 @@ export function ActiveEvents(props) {
 
     useEffect(() => {
         fetchActiveEventsData();
-    }, []);
+    }, [props.username]);
 
     async function fetchActiveEventsData() {
-        const data = await fetchActiveEvents()
+        const data = await fetchActiveEventsWithWalletProvider(props.username)
         setActiveEvents(data)
         setLoaded(true)
     }

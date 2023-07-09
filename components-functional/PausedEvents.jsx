@@ -7,11 +7,11 @@ export function PausedEvents(props) {
 
     useEffect(() => {
         fetchPausedEventsData();
-    }, []);
+    }, [props.username]);
 
 
     async function fetchPausedEventsData() {
-        const data = await fetchPausedEvents()
+        const data = await fetchPausedEvents(props.username)
         setPausedEvents(data)
         setLoaded(true)
     }

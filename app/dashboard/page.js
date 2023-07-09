@@ -1,33 +1,35 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import { DeployContract } from "../../components-functional/Deploy";
 import { DashboardComponent } from "../../components-functional/Dashboard";
-import { checkIfDeployed } from "../../utils";
+import { fetchIfDeployed } from "../../utils";
 
 export default function Dashboard() {
-    const [isDeployed, setIsDeployed] = useState(true);
+    const [isDeployed, setIsDeployed] = useState();
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        fetchDataFromContract()
+        checkDeployment();
     }, []);
 
-    async function fetchDataFromContract() {
-        const data = await checkIfDeployed()
-        setIsDeployed(data)
+    async function checkDeployment() {
+        const data = await fetchIfDeployed();
+        setIsDeployed(data);
+        setLoaded(true);
     }
 
+    if (loaded == false) return <div></div>;
 
     if (!isDeployed)
         return (
             <div>
                 <DeployContract />
-                {/* <button onClick={checkDeployment}>debug</button> */}
             </div>
         );
+
     return (
         <div>
             <DashboardComponent />
-            {/* <button onClick={checkDeployment}>debug</button> */}
         </div>
     );
 }

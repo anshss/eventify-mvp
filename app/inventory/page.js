@@ -1,5 +1,5 @@
 "use client";
-import { fetchInventory } from "../../utils";
+import { fetchCommonInventory } from "../../utils";
 import { useEffect, useState } from "react";
 
 export default function Inventory() {
@@ -7,11 +7,11 @@ export default function Inventory() {
     const [inventoryData, setInventoryData] = useState()
 
     useEffect(() => {
-        fetchDataFromContract()
+        fetchInventoryData()
     }, [])
 
-    async function fetchDataFromContract() {
-        const data = await fetchInventory()
+    async function fetchInventoryData() {
+        const data = await fetchCommonInventory()
         setInventoryData(data)
     }
 

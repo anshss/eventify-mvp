@@ -12,7 +12,7 @@ export function MintedCollection(props) {
     }, [props.username])
 
     async function fetchMintedCollectionData() {
-        const data = await fetchMintedCollection()
+        const data = await fetchMintedCollection(props.username)
         setMintedCollection(data)
         setLoaded(true)
     }

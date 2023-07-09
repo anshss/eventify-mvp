@@ -20,7 +20,7 @@ export function DashboardComponent() {
         setUsername(data)
     }
 
-    if (!username) return
+    if (!username) return <div>Fetching..</div>
 
     return (
         <div>

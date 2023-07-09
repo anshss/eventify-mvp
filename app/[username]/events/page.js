@@ -1,13 +1,13 @@
 'use client'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { checkUsernameValidity, fetchActiveEvents } from "../../../utils";
+import { fetchUsernameValidity, fetchActiveEvents, buyTicket } from "../../../utils";
 
 export default function Events() {
 
     const pathName = usePathname();
 
-    const id = pathName?.split("/")[2];
+    const id = pathName?.split("/")[1];
 
     const [activeEvents, setActiveEvents] = useState([]);
     const [isUsernameValid, setIsUsernameValid] = useState(false)
@@ -27,21 +27,19 @@ export default function Events() {
 
 
     async function checkUsernameValidityData() {
-        const data = await checkUsernameValidity()
+        const data = await fetchUsernameValidity(id)
         setIsUsernameValid(data)
     }
 
     async function fetchActiveEventsData() {
-        const data = await fetchActiveEvents()
+        const data = await fetchActiveEvents(id)
         setActiveEvents(data);
         setLoaded(true)
     }
 
     function NFTCard(prop) {
-        async function buyTicket(ticketId) {
-            const contract = await getContract()
-            const tx = await contract.buyTicketCall(id, ticketId)
-            await tx.wait()
+        async function buyTicketCall(ticketId, price) {
+            await buyTicket(id, ticketId, price)
         }
 
         return (
@@ -53,17 +51,19 @@ export default function Events() {
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => buyTicket(prop.ticketId)}>Buy Ticket</button>
+                <button onClick={() => buyTicketCall(prop.ticketId, prop.price)}>Buy Ticket</button>
             </div>
         );
     }
+
+    if (loaded == false) return <div>Fetching..</div>
 
     if (isUsernameValid == false) return (
         <div>User do not exist</div>
     )
 
     if (isUsernameValid == true && loaded == true && activeEvents.length == 0) return (
-        <div>ACTIVE EVENTS <br /> No Tickets</div>
+        <div>ACTIVE EVENTS <br /> No events</div>
     )
 
     return(

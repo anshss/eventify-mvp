@@ -1,5 +1,5 @@
 "use client";
-import { fetchFeaturedRequest } from "../../utils";
+import { fetchFeaturedEvents } from "../../utils";
 import { useEffect, useState } from "react";
 
 export default function Featured() {
@@ -7,11 +7,11 @@ export default function Featured() {
     const [featuredEvents, setFeaturedEvents] = useState()
 
     useEffect(() => {
-        fetchDataFromContract()
+        featuredEventsData()
     }, [])
 
-    async function fetchDataFromContract() {
-        const data = await fetchFeaturedRequest()
+    async function featuredEventsData() {
+        const data = await fetchFeaturedEvents()
         setFeaturedEvents(data)
     }
 
