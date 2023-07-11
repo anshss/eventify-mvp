@@ -3,6 +3,7 @@ import web3modal from "web3modal";
 import { ethers } from "ethers";
 import { address, abiFactory } from "./config";
 import axios from "axios";
+import { Web3Storage } from 'web3.storage'
 
 const InfuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
 
@@ -229,6 +230,43 @@ export async function publishTickets(ticketId) {
     console.log("Published");
 }
 
+export async function fetchShortlistEvents(username) {
+    const contract = await getContract();
+    // const data = await contract.fetchShortlistEventsCall(username);
+    const data = await contract.fetchActiveEventsCall(username);
+    const items = await Promise.all(
+        data.map(async (i) => {
+            const tokenUri = await contract.uriCall(
+                username,
+                i.ticketId.toString()
+            );
+            console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i.price);
+            let item = {
+                ticketId: i.ticketId.toString(),
+                name: meta.data.name,
+                venue: meta.data.venue,
+                date: meta.data.name,
+                supply: i.supply.toNumber(),
+                price,
+                NftURI: tokenUri,
+                // cover: meta.data.cover
+            };
+            return item;
+        })
+    );
+    console.log("Active Events", items);
+    return items;
+}
+
+export async function updateShortlist(ticketId, shortlistArray) {
+    const contract = await getContract(true);
+    const tx = await contract.updateShortlist(ticketId, shortlistArray);
+    await tx.wait();
+    console.log("Shortlist uploaded");
+}
+
 export async function fetchActiveEventsWithWalletProvider(username) {
     const contract = await getContract();
     const data = await contract.fetchActiveEventsCall(username);
@@ -301,13 +339,6 @@ export async function runEvent(ticketId) {
     console.log("Event Running");
 }
 
-export async function updateShortlist(ticketId, shortlistArray) {
-    const contract = await getContract(true);
-    const tx = await contract.updateShortlist(ticketId, shortlistArray);
-    await tx.wait();
-    console.log("Shortlist uploaded");
-}
-
 // --owner-specific functions
 
 export async function fetchIfWhitelist(address) {
@@ -348,3 +379,22 @@ export async function approveFeaturedRequest(username, ticketId) {
     await data.wait();
     console.log("Approved");
 }
+
+// --web3-storage-token functions
+
+function getAccessToken() {
+    // return process.env.NEXT_PUBLIC_Web3StorageID
+    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyMjkyQjQ5YzFjN2ExMzhERWQxQzQ3NGNlNmEyNmM1NURFNWQ0REQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUyMzg2MDc1NDEsIm5hbWUiOiJNZXRhRmkifQ.cwyjEIx8vXtTnn8Y3vctroo_rooHV4ww_2xKY-MT0rs";
+}
+
+function makeStorageClient() {
+    return new Web3Storage({ token: getAccessToken() });
+}
+
+export const uploadToIPFS = async (files) => {
+    const client = makeStorageClient();
+    const cid = await client.put(files);
+    return cid;
+};
+
+// ----

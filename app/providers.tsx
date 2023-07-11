@@ -23,6 +23,7 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
     [publicProvider()]
 );
 
+// const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const projectId = `61add3dab2037eb610bc9a82af42251c`;
 
 const { wallets } = getDefaultWallets({

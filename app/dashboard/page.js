@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { DeployContract } from "../../components-functional/Deploy";
 import { fetchIfDeployed } from "../../utils";
 import { fetchUsername } from "../../utils";
-import { ActiveEvents } from "../../components-functional/ActiveEvents";
 import { CreateEvent } from "../../components-functional/CreateEvent";
 import { MintedCollection } from "../../components-functional/MintedCollections";
+import { ShortlistEvents } from "../../components-functional/ShortlistEvents";
+import { ActiveEvents } from "../../components-functional/ActiveEvents";
 import { PausedEvents } from "../../components-functional/PausedEvents";
 import { Domain } from "../../components-functional/Domain";
 
@@ -50,6 +51,7 @@ export default function Dashboard() {
             <p>Username: {username}</p>
             <CreateEvent />
             <MintedCollection username={username} />
+            <ShortlistEvents username={username} />
             <ActiveEvents username={username} />
             <PausedEvents username={username} />
             {/* <Domain /> */}

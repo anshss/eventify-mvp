@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
-import { fetchActiveEventsWithWalletProvider, pauseEvent } from "../utils";
+import { fetchShortlistEvents, updateShortlist } from "../utils";
 
-export function ActiveEvents(props) {
+export function ShortlistEvents(props) {
     const [activeEvents, setActiveEvents] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         if (props.username) {
-            fetchActiveEventsData();
+            fetchShortlistEventsData();
         }
     }, [props.username]);
 
-    async function fetchActiveEventsData() {
-        const data = await fetchActiveEventsWithWalletProvider(props.username);
+    async function fetchShortlistEventsData() {
+        const data = await fetchShortlistEvents(props.username);
         setActiveEvents(data);
         setLoaded(true);
     }
 
     function NFTCard(prop) {
-        async function pauseEventCall(ticketId) {
-            await pauseEvent(ticketId);
+        async function updateShortlistCall(ticketId) {
+            await updateShortlist(ticketId);
         }
+
+        const [shortlistArray, setShortlistArray] = useState([])
 
         return (
             <div className="text-black mb-5 mt-5">
@@ -31,10 +33,10 @@ export function ActiveEvents(props) {
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => pauseEventCall(prop.ticketId)}>
-                    Pause
+                <input name="shortlistInput" placeholder="address" onChange={e => setShortlistArray(...shortlistArray, e.target.value)} />
+                <button onClick={() => updateShortlistCall(prop.ticketId)}>
+                    Update
                 </button>
-                {/* <button onClick={() => runEvent(prop.tokenId)}>Run</button> */}
             </div>
         );
     }
@@ -44,13 +46,13 @@ export function ActiveEvents(props) {
     if (loaded == true && activeEvents.length == 0)
         return (
             <div>
-                ACTIVE EVENTS <br /> No Events
+                SHORTLIST EVENTS <br /> No Events
             </div>
         );
 
     return (
         <div>
-            ACTIVE EVENTS
+            SHORTLIST EVENTS
             <div>
                 {activeEvents.map((nft, i) => {
                     return (

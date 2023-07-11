@@ -34,7 +34,6 @@ export function ActiveEvents(props) {
                 <button onClick={() => pauseEventCall(prop.ticketId)}>
                     Pause
                 </button>
-                {/* <button onClick={() => runEvent(prop.tokenId)}>Run</button> */}
             </div>
         );
     }

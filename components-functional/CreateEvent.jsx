@@ -1,8 +1,7 @@
 'use client'
 import { useState } from "react";
-import { getContract } from "../utils";
+import { getContract, uploadToIPFS } from "../utils";
 import { ethers } from "ethers";
-import { Web3Storage } from 'web3.storage'
 
 export function CreateEvent() {
     const [formInput, setFormInput] = useState({
@@ -13,20 +12,6 @@ export function CreateEvent() {
         price: "10",
         supply: "10"
     });
-
-    function getAccessToken() {
-        return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyMjkyQjQ5YzFjN2ExMzhERWQxQzQ3NGNlNmEyNmM1NURFNWQ0REQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjUyMzg2MDc1NDEsIm5hbWUiOiJNZXRhRmkifQ.cwyjEIx8vXtTnn8Y3vctroo_rooHV4ww_2xKY-MT0rs'
-      }
-    
-      function makeStorageClient() {
-        return new Web3Storage({ token: getAccessToken() })
-      }
-    
-      const uploadToIPFS = async (files) => {
-        const client = makeStorageClient()
-        const cid = await client.put(files)
-        return cid
-      }
 
     async function formURI() {
         const { name, venue, date, price, supply } = formInput

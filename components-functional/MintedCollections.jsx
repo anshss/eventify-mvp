@@ -38,14 +38,12 @@ export function MintedCollection(props) {
         );
     }
 
-    function debug() {
-        console.log(mintedCollection);
-    }
+    if (loaded == false) return <div>Fetching..</div>;
 
     if (loaded == true && mintedCollection.length == 0)
         return (
             <div>
-                MINTED COLLECTION <br /> No Tickets
+                MINTED COLLECTION <br /> No Events
             </div>
         );
     return (
@@ -67,7 +65,6 @@ export function MintedCollection(props) {
                     );
                 })}
             </div>
-            {/* <button onClick={debug}>debug</button> */}
         </div>
     );
 }

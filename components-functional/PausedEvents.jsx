@@ -31,16 +31,17 @@ export function PausedEvents(props) {
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                {/* <button onClick={() => pauseEvent(prop.tokenId)}>Pause</button> */}
                 <button onClick={() => runEventCall(prop.tokenId)}>Run</button>
             </div>
         );
     }
 
+    if (loaded == false) return <div>Fetching..</div>;
+
     if (loaded == true && pausedEvents.length == 0)
         return (
             <div>
-                PAUSED EVENTS <br /> No Tickets
+                PAUSED EVENTS <br /> No Events
             </div>
         );
 
