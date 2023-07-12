@@ -1,6 +1,6 @@
-const PolygonAddress = `0x2D3BE3f0860d8CDA8f0AE48A1b760EBFDa9cBFc7`
+const PolygonAddressFactory = `0x2D3BE3f0860d8CDA8f0AE48A1b760EBFDa9cBFc7`
 
-export const address = PolygonAddress
+export const addressFactory = PolygonAddressFactory
 
 export const abiFactory = `
 [
@@ -696,7 +696,7 @@ export const abiFactory = `
 ]
 `
 
-export const abiContract = `
+export const abiEventify = `
 [
 	{
 		"inputs": [],
@@ -1501,3 +1501,5 @@ export const abiContract = `
 	}
 ]
 `
+
+export const abiFeatured = ``
