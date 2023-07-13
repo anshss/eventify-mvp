@@ -169,19 +169,21 @@ export async function fetchFeaturedEventsWithInfura() {
     const data = await contract.fetchFeaturedEvents();
     const items = await Promise.all(
         data.map(async (i) => {
-            // const tokenUri = await contract.uriCall(id, i.ticketId.toString());
+            console.log(i)
+            const tokenUri = await contract.uriCall(i.owner, i.ticketId.toString());
             // console.log(tokenUri);
-            // const meta = await axios.get(tokenUri);
+            const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 ticketId: i.ticketId.toString(),
-                // name: meta.data.name,
-                // venue: meta.data.venue,
-                // date: meta.data.name,
+                host: i.host,
+                name: meta.data.name,
+                venue: meta.data.venue,
+                date: meta.data.name,
                 supply: i.supply.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })
@@ -516,11 +518,11 @@ export async function fetchFeaturedRequest() {
 }
 
 export async function approveFeaturedRequest(host, ticketId) {
-    const username = await fetchUsernameFromAddress(host)
-    console.log(username)
+    // const username = await fetchUsernameFromAddress(host)
+    // console.log(username)
     const contract = await getFactoryContract(true);
 
-    const data = await contract.approveFeaturedEvents(username, ticketId);
+    const data = await contract.approveFeaturedEvents(host, ticketId);
     await data.wait();
     console.log("Approved");
 }

@@ -30,7 +30,7 @@ export function MintedCollection() {
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button onClick={() => publishTicketsCall(prop.tokenId)}>
-                    Publish Tickets
+                    Publish
                 </button>
             </div>
         );

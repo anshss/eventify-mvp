@@ -25,8 +25,8 @@ export function CreateEvent() {
 
     async function onClickMint() {
         const NftURI = await formURI()
-        const privateEvent = false
-        await mint(formInput.price, formInput.supply, privateEvent, NftURI)
+        const isPrivateEvent = false
+        await mint(formInput.price, formInput.supply, isPrivateEvent, NftURI)
     }
 
     return (

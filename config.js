@@ -1,10 +1,9 @@
-const PolygonAddressFactory = `0x83C53f396D96cbABcC1C11bcaE1cFBE77ee7441d`
+const PolygonAddressFactory = `0x2D88d6925ff3102820E0bF872EE2Ffd2a15Aa186`
 
 export const addressFactory = PolygonAddressFactory
 
 
-export const abiFactory = `
-[
+export const abiFactory = `[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -89,9 +88,9 @@ export const abiFactory = `
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",
@@ -192,6 +191,11 @@ export const abiFactory = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -228,7 +232,7 @@ export const abiFactory = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -478,6 +482,30 @@ export const abiFactory = `
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "uriCall",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			},
@@ -549,13 +577,17 @@ export const abiFactory = `
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]
-`
+]`
 
-export const abiEventify = `
-[
+export const abiEventify = `[
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_featuredContract",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -783,6 +815,11 @@ export const abiEventify = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -819,7 +856,7 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -843,6 +880,11 @@ export const abiEventify = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -879,7 +921,7 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -903,6 +945,11 @@ export const abiEventify = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -939,7 +986,7 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -963,6 +1010,11 @@ export const abiEventify = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -999,7 +1051,7 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -1023,6 +1075,11 @@ export const abiEventify = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -1059,7 +1116,7 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -1083,6 +1140,11 @@ export const abiEventify = `
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "supply",
 						"type": "uint256"
@@ -1119,7 +1181,7 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "isShortlistEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
 					},
 					{
@@ -1247,6 +1309,11 @@ export const abiEventify = `
 		"name": "idToTicket",
 		"outputs": [
 			{
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
 				"name": "supply",
 				"type": "uint256"
@@ -1283,7 +1350,7 @@ export const abiEventify = `
 			},
 			{
 				"internalType": "bool",
-				"name": "isShortlistEvent",
+				"name": "isPrivateEvent",
 				"type": "bool"
 			},
 			{
@@ -1333,7 +1400,7 @@ export const abiEventify = `
 			},
 			{
 				"internalType": "bool",
-				"name": "_openEvent",
+				"name": "_isPrivateEvent",
 				"type": "bool"
 			},
 			{
@@ -1710,11 +1777,9 @@ export const abiEventify = `
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
-`
+]`
 
-export const abiFeatured = `
-[
+export const abiFeatured = `[
 	{
 		"anonymous": false,
 		"inputs": [
@@ -2035,5 +2100,4 @@ export const abiFeatured = `
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]
-`
+]`

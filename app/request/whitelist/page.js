@@ -1,5 +1,5 @@
 "use client";
-import { checkWhitelist, whitelistUser } from "../../utils";
+import { checkWhitelist, whitelistUser } from "../../../utils";
 import { useState } from "react";
 
 export default function Whitelist() {

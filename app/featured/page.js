@@ -1,5 +1,5 @@
 "use client";
-import { fetchFeaturedEventsWithInfura } from "../../utils";
+import { fetchFeaturedEventsWithInfura, buyTicket, fetchUsernameFromAddress } from "../../utils";
 import { useEffect, useState } from "react";
 
 export default function Featured() {
@@ -18,7 +18,8 @@ export default function Featured() {
 
     function NFTCard(prop) {
         async function buyTicketCall(ticketId, price) {
-            await buyTicket(id, ticketId, price);
+            const username = await fetchUsernameFromAddress(prop.host)
+            await buyTicket(username, ticketId, price);
         }
 
         return (
@@ -56,6 +57,7 @@ export default function Featured() {
                     return (
                         <NFTCard
                             key={i}
+                            host={nft.host}
                             ticketId={nft.ticketId}
                             name={nft.name}
                             venue={nft.venue}
