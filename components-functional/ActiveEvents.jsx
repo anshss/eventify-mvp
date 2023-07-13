@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import { fetchActiveEventsWithWalletProvider, pauseEvent } from "../utils";
+import { fetchActiveEvents, pauseEvent, raiseFeaturedEvents } from "../utils";
 
-export function ActiveEvents(props) {
+export function ActiveEvents() {
     const [activeEvents, setActiveEvents] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (props.username) {
-            fetchActiveEventsData();
-        }
-    }, [props.username]);
+        fetchActiveEventsData();
+    }, []);
 
     async function fetchActiveEventsData() {
-        const data = await fetchActiveEventsWithWalletProvider(props.username);
+        const data = await fetchActiveEvents();
         setActiveEvents(data);
         setLoaded(true);
     }
@@ -20,6 +18,10 @@ export function ActiveEvents(props) {
     function NFTCard(prop) {
         async function pauseEventCall(ticketId) {
             await pauseEvent(ticketId);
+        }
+
+        async function featureEventCall(ticketId) {
+            await raiseFeaturedEvents(ticketId)
         }
 
         return (
@@ -33,6 +35,9 @@ export function ActiveEvents(props) {
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button onClick={() => pauseEventCall(prop.ticketId)}>
                     Pause
+                </button>
+                <button onClick={() => featureEventCall(prop.ticketId)}>
+                    Feature
                 </button>
             </div>
         );

@@ -7,6 +7,46 @@ import { Web3Storage } from "web3.storage";
 
 const InfuraKey = process.env.NEXT_PUBLIC_INFURA_KEY;
 
+// --contract-instance functions
+// --contract-instance functions
+// --contract-instance functions
+// --contract-instance functions
+// --contract-instance functions
+
+export async function getFactoryContractWithInfura() {
+    const provider = new ethers.providers.JsonRpcProvider(
+        `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
+    );
+    const factoryContract = new ethers.Contract(
+        addressFactory,
+        abiFactory,
+        provider
+    );
+    return factoryContract;
+}
+
+export async function getEventifyContractWithInfura(username) {
+    const provider = new ethers.providers.JsonRpcProvider(
+        `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
+    );
+    // const factoryContract = new ethers.Contract(
+    //     addressFactory,
+    //     abiFactory,
+    //     provider
+    // );
+    const factoryContract = await getFactoryContractWithInfura()
+
+    const id = await factoryContract.usernamesToContractId(username);
+    const addressEventify = await factoryContract.contracts(id);
+
+    const eventifyContract = new ethers.Contract(
+        addressEventify,
+        abiEventify,
+        provider
+    );
+    return eventifyContract;
+}
+
 export async function getFactoryContract(providerOrSigner) {
     const modal = new web3modal();
     const connection = await modal.connect();
@@ -24,59 +64,26 @@ export async function getFactoryContract(providerOrSigner) {
     return contract;
 }
 
-export async function getEventifyContractAddress(username) {
-    const contract = await getFactoryContract();
-    const id = await contract.usernamesToContractId(username);
-    const address = await contract.contracts(id);
-    return address;
-}
-
-export async function getEventifyContract(addressEventify, providerOrSigner) {
+export async function getEventifyContract(username, providerOrSigner) {
+    const contractAddress = await getEventifyContractAddress(username);
     const modal = new web3modal();
     const connection = await modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const contract = new ethers.Contract(
-        addressEventify,
+        contractAddress,
         abiEventify,
         provider
     );
     if (providerOrSigner == true) {
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
-            addressEventify,
+            contractAddress,
             abiEventify,
             signer
         );
         return contract;
     }
     return contract;
-}
-
-export async function getEventifyContractWithInfura(username) {
-    const provider = new ethers.providers.JsonRpcProvider(
-        `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
-    );
-    const factoryContract = new ethers.Contract(
-        addressFactory,
-        abiFactory,
-        provider
-    );
-    const id = await factoryContract.usernamesToContractId(username);
-    const addressEventify = await factoryContract.contracts(id);
-
-    const contract = new ethers.Contract(
-        addressEventify,
-        abiEventify,
-        provider
-    );
-    return contract;
-}
-
-export async function getFeaturedContractAddress() {
-    const contract = await getFactoryContract();
-    // const id = await contract.usernamesToContractId(username);
-    // const address = await contract.contracts(id);
-    return address;
 }
 
 export async function getFeaturedContract(providerOrSigner) {
@@ -101,28 +108,63 @@ export async function getFeaturedContract(providerOrSigner) {
     return contract;
 }
 
-export async function getFeaturedContractWithInfura() {
-    const provider = new ethers.providers.JsonRpcProvider(
-        `https://polygon-mumbai.infura.io/v3/${InfuraKey}`
-    );
-    const factoryContract = new ethers.Contract(
-        addressFactory,
-        abiFactory,
-        provider
-    );
-    // const id = await factoryContract.usernamesToContractId(username);
-    // const addressFeatured = await factoryContract.contracts(id);
-    
-    const contract = new ethers.Contract(
-        addressFeatured,
-        abiFeatured,
-        provider
-    );
-    return contract;
+export async function getEventifyContractAddress(username) {
+    const contract = await getFactoryContract();
+    const id = await contract.usernamesToContractId(username);
+    const address = await contract.contracts(id);
+    return address;
 }
 
-export async function fetchFeaturedEvents() {
-    const contract = await getFeaturedContractWithInfura();
+export async function getFeaturedContractAddress() {
+    const contract = await getFactoryContract();
+    const address = await contract.featuredEventsInstanceAddress()
+    return address
+}
+
+// --one-time-execute functions
+// --one-time-execute functions
+// --one-time-execute functions
+// --one-time-execute functions
+// --one-time-execute functions
+
+export async function getUserAddress() {
+    const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+    });
+    return accounts[0];
+}
+
+export async function fetchIfDeployed() {
+    const contract = await getFactoryContract();
+    const address = await getUserAddress();
+    const data = await contract.hasDeployed(address.toString());
+    return data;
+}
+
+export async function fetchUsername() {
+    const contract = await getFactoryContract();
+    const address = await getUserAddress();
+    const check = await fetchIfDeployed();
+    if (check == true) {
+        const data = await contract.addressToUsernames(address);
+        return data;
+    }
+}
+
+export async function fetchUsernameFromAddress(address) {
+    const contract = await getFactoryContract();
+    const data = await contract.addressToUsernames(address.toString());
+    return data;
+}
+
+// --user-specific functions
+// --user-specific functions
+// --user-specific functions
+// --user-specific functions
+// --user-specific functions
+
+export async function fetchFeaturedEventsWithInfura() {
+    const contract = await getFactoryContractWithInfura();
 
     const data = await contract.fetchFeaturedEvents();
     const items = await Promise.all(
@@ -148,10 +190,8 @@ export async function fetchFeaturedEvents() {
     return items;
 }
 
-export async function fetchActiveEvents(username) {
+export async function fetchActiveEventsWithInfura(username) {
     const contract = await getEventifyContractWithInfura(username);
-    // const contractAddress = await getEventifyContractAddress(username);
-    // const contract = await getEventifyContract(contractAddress, false);
 
     const data = await contract.fetchActiveEvents();
     const items = await Promise.all(
@@ -178,9 +218,7 @@ export async function fetchActiveEvents(username) {
 }
 
 export async function fetchInventory(username) {
-    // const contract = await getContract();
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, false);
+    const contract = await getEventifyContract(username, false);
 
     const data = await contract.fetchPurchasedTickets();
     const items = await Promise.all(
@@ -207,9 +245,7 @@ export async function fetchInventory(username) {
 }
 
 export async function fetchCommonInventory() {
-    // const contract = await getContract();
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, false);
+    const contract = await getFactoryContract();
 
     const data = await contract.fetchAllPurchasedTickets();
     const items = await Promise.all(
@@ -241,34 +277,10 @@ export async function fetchCommonInventory() {
 // --dashboard-specific functions
 // --dashboard-specific functions
 
-export async function getUserAddress() {
-    const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-    });
-    return accounts[0];
-}
-
-export async function fetchIfDeployed() {
-    const contract = await getFactoryContract();
-    const address = await getUserAddress();
-    const tx = await contract.hasDeployed(address.toString());
-    return tx;
-}
-
 export async function fetchUsernameValidity(username) {
     const contract = await getFactoryContract();
     const data = await contract.usernameExist(username);
     return data;
-}
-
-export async function fetchUsername() {
-    const contract = await getFactoryContract();
-    const address = await getUserAddress();
-    const check = await fetchIfDeployed();
-    if (check == true) {
-        const data = await contract.addressToUsernames(address);
-        return data;
-    }
 }
 
 export async function deploy(username) {
@@ -284,12 +296,11 @@ export async function deploy(username) {
     console.log("Deployed");
 }
 
-export async function fetchMintedCollection(username) {
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, false);
+export async function fetchMintedCollection() {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username, false);
 
     const data = await contract.fetchMintedTickets();
-
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
@@ -313,12 +324,38 @@ export async function fetchMintedCollection(username) {
     return items;
 }
 
-export async function fetchShortlistEvents(username) {
-    // const contract = await getContract();
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress);
+export async function fetchShortlistEvents() {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username);
 
-    // const data = await contract.fetchShortlistEventsCall(username);
+    const data = await contract.fetchShortlistEvents();
+    const items = await Promise.all(
+        data.map(async (i) => {
+            const tokenUri = await contract.uri(i.ticketId.toString());
+            console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i.price);
+            let item = {
+                ticketId: i.ticketId.toString(),
+                name: meta.data.name,
+                venue: meta.data.venue,
+                date: meta.data.name,
+                supply: i.supply.toNumber(),
+                price,
+                NftURI: tokenUri,
+                // cover: meta.data.cover
+            };
+            return item;
+        })
+    );
+    console.log("Active Events", items);
+    return items;
+}
+
+export async function fetchActiveEvents() {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username);
+
     const data = await contract.fetchActiveEvents();
     const items = await Promise.all(
         data.map(async (i) => {
@@ -343,39 +380,9 @@ export async function fetchShortlistEvents(username) {
     return items;
 }
 
-export async function fetchActiveEventsWithWalletProvider(username) {
-    // const contract = await getContract();
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress);
-
-    const data = await contract.fetchActiveEvents();
-    const items = await Promise.all(
-        data.map(async (i) => {
-            const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
-            const meta = await axios.get(tokenUri);
-            let price = ethers.utils.formatEther(i.price);
-            let item = {
-                ticketId: i.ticketId.toString(),
-                name: meta.data.name,
-                venue: meta.data.venue,
-                date: meta.data.name,
-                supply: i.supply.toNumber(),
-                price,
-                NftURI: tokenUri,
-                // cover: meta.data.cover
-            };
-            return item;
-        })
-    );
-    console.log("Active Events", items);
-    return items;
-}
-
-export async function fetchPausedEvents(username) {
-    // const contract = await getContract();
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress);
+export async function fetchPausedEvents() {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username);
 
     const data = await contract.fetchPausedEvents();
     const items = await Promise.all(
@@ -401,50 +408,62 @@ export async function fetchPausedEvents(username) {
     return items;
 }
 
-export async function updateShortlist(username, ticketId, shortlistArray) {
-    // const contract = await getContract(true);
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, true);
+export async function mint(_price, _supply, _privateEvent, NftURI) {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username, true);
+
+    const price = ethers.utils.parseEther(_price);
+    const tx = await contract.mintTickets(price, _supply, _privateEvent, NftURI)
+    await tx.wait()
+    console.log("minted")
+}
+
+export async function updateShortlist(ticketId, shortlistArray) {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username, true);
 
     const tx = await contract.updateShortlist(ticketId, shortlistArray);
     await tx.wait();
     console.log("Shortlist uploaded");
 }
 
-export async function publishTickets(username, ticketId) {
-    // const contract = await getContract(true);
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, true);
+export async function publishTickets(ticketId) {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username, true);
 
     const tx = await contract.publishTickets(ticketId);
     await tx.wait();
     console.log("Published");
 }
 
-export async function pauseEvent(username, ticketId) {
-    // const contract = await getContract(true);
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, true);
+export async function pauseEvent(ticketId) {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username, true);
 
-    const tx = await contract.pauseActiveEventCall(ticketId);
+    const tx = await contract.pauseActiveEvent(ticketId);
     await tx.wait();
     console.log("Paused");
 }
 
-export async function runEvent(username, ticketId) {
-    // const contract = await getContract(true);
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, true);
+export async function runEvent(ticketId) {
+    const username = await fetchUsername()
+    const contract = await getEventifyContract(username, true);
 
     const tx = await contract.runPausedEvent(ticketId);
     await tx.wait();
     console.log("Event Running");
 }
 
+export async function raiseFeaturedEvents(ticketId) {
+    const contract = await getFactoryContract(true);
+
+    const tx = await contract.raiseFeaturedEvents(ticketId);
+    await tx.wait();
+    console.log("Featured Request Sent");
+}
+
 export async function buyTicket(username, ticketId, price) {
-    // const contract = await getContract(true);
-    const contractAddress = await getEventifyContractAddress(username);
-    const contract = await getEventifyContract(contractAddress, true);
+    const contract = await getEventifyContract(username, true);
 
     const weiPrice = ethers.utils.parseUnits(price.toString(), "ether");
     const tx = await contract.buyTicket(ticketId, {
@@ -479,9 +498,9 @@ export async function whitelistUser(address) {
 }
 
 export async function fetchFeaturedRequest() {
-    const contract = await getFactoryContractWithInfura();
+    const contract = await getFactoryContract();
 
-    const data = await contract.fetchFeaturedEvents(id.toString());
+    const data = await contract.fetchAllFeaturedRequest();
     const items = await Promise.all(
         data.map(async (i) => {
             let item = {
@@ -496,7 +515,9 @@ export async function fetchFeaturedRequest() {
     return items;
 }
 
-export async function approveFeaturedRequest(username, ticketId) {
+export async function approveFeaturedRequest(host, ticketId) {
+    const username = await fetchUsernameFromAddress(host)
+    console.log(username)
     const contract = await getFactoryContract(true);
 
     const data = await contract.approveFeaturedEvents(username, ticketId);

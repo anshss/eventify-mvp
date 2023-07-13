@@ -1,7 +1,7 @@
 'use client'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { fetchUsernameValidity, fetchActiveEvents, buyTicket } from "../../../utils";
+import { fetchUsernameValidity, fetchActiveEventsWithInfura, buyTicket } from "../../../utils";
 
 export default function Events() {
 
@@ -32,7 +32,7 @@ export default function Events() {
     }
 
     async function fetchActiveEventsData() {
-        const data = await fetchActiveEvents(id)
+        const data = await fetchActiveEventsWithInfura(id)
         setActiveEvents(data);
         setLoaded(true)
         console.log("user host: ", id)
@@ -59,11 +59,11 @@ export default function Events() {
 
     if (loaded == false) return <div>Fetching..</div>
 
-    if (isUsernameValid == false) return (
+    if (loaded == true && isUsernameValid == false) return (
         <div>User do not exist</div>
     )
 
-    if (isUsernameValid == true && loaded == true && activeEvents.length == 0) return (
+    if (loaded == true && isUsernameValid == true && activeEvents.length == 0) return (
         <div>ACTIVE EVENTS <br /> No events</div>
     )
 

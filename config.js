@@ -1,6 +1,7 @@
-const PolygonAddressFactory = `0x2D3BE3f0860d8CDA8f0AE48A1b760EBFDa9cBFc7`
+const PolygonAddressFactory = `0x83C53f396D96cbABcC1C11bcaE1cFBE77ee7441d`
 
 export const addressFactory = PolygonAddressFactory
+
 
 export const abiFactory = `
 [
@@ -98,9 +99,9 @@ export const abiFactory = `
 				"type": "uint256"
 			}
 		],
-		"name": "buyTicketCall",
+		"name": "approveFeaturedEvents",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -143,10 +144,10 @@ export const abiFactory = `
 	},
 	{
 		"inputs": [],
-		"name": "eventifyLibrary",
+		"name": "featuredEventsInstanceAddress",
 		"outputs": [
 			{
-				"internalType": "contract Eventify",
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -155,35 +156,14 @@ export const abiFactory = `
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
-			}
-		],
-		"name": "fetchActiveEventsCall",
+		"inputs": [],
+		"name": "fetchAllFeaturedRequest",
 		"outputs": [
 			{
 				"components": [
 					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "host",
 						"type": "address"
 					},
 					{
@@ -193,16 +173,11 @@ export const abiFactory = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isPublished",
+						"name": "isApproved",
 						"type": "bool"
 					}
 				],
-				"internalType": "struct structTicket.Ticket[]",
+				"internalType": "struct FactoryEventify.FeaturedRequest[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -211,14 +186,8 @@ export const abiFactory = `
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
-			}
-		],
-		"name": "fetchAllEventsCall",
+		"inputs": [],
+		"name": "fetchAllPurchasedTickets",
 		"outputs": [
 			{
 				"components": [
@@ -249,35 +218,44 @@ export const abiFactory = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
 						"name": "isPublished",
 						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
+						"type": "bool"
 					}
 				],
-				"internalType": "struct structTicket.Ticket[]",
+				"internalType": "struct structTicket.Ticket[][]",
 				"name": "",
-				"type": "tuple[]"
+				"type": "tuple[][]"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
-			}
-		],
-		"name": "fetchMintedTicketsCall",
+		"inputs": [],
+		"name": "fetchFeaturedEvents",
 		"outputs": [
 			{
 				"components": [
+					{
+						"internalType": "uint256",
+						"name": "featuredId",
+						"type": "uint256"
+					},
 					{
 						"internalType": "uint256",
 						"name": "supply",
@@ -312,121 +290,19 @@ export const abiFactory = `
 						"internalType": "bool",
 						"name": "isPublished",
 						"type": "bool"
-					}
-				],
-				"internalType": "struct structTicket.Ticket[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
-			}
-		],
-		"name": "fetchPausedEventsCall",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ticketId",
-						"type": "uint256"
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "openEvent",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
-						"name": "isPublished",
+						"name": "isOver",
 						"type": "bool"
 					}
 				],
-				"internalType": "struct structTicket.Ticket[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
-			}
-		],
-		"name": "fetchPurchasedTickets",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "supply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "ticketId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "status",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "isPublished",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct structTicket.Ticket[]",
+				"internalType": "struct structFeatured.Ticket[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -475,6 +351,35 @@ export const abiFactory = `
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToFeaturedRequest",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "ticketId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isApproved",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
@@ -511,29 +416,6 @@ export const abiFactory = `
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_price",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_supply",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_tokenURI",
-				"type": "string"
-			}
-		],
-		"name": "mintTicketsCall",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "owner",
 		"outputs": [
@@ -554,20 +436,7 @@ export const abiFactory = `
 				"type": "uint256"
 			}
 		],
-		"name": "pauseActiveEventCall",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_ticketId",
-				"type": "uint256"
-			}
-		],
-		"name": "publishTickets",
+		"name": "raiseFeaturedEvents",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -577,19 +446,6 @@ export const abiFactory = `
 		"name": "renounceOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_ticketId",
-				"type": "uint256"
-			}
-		],
-		"name": "runPausedEventCall",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -621,17 +477,17 @@ export const abiFactory = `
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_ticketId",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "uriCall",
+		"name": "userToAllHostPurchased",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -726,6 +582,25 @@ export const abiEventify = `
 			}
 		],
 		"name": "ApprovalForAll",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
 		"type": "event"
 	},
 	{
@@ -934,12 +809,22 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
 						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
 						"type": "bool"
 					}
 				],
@@ -984,12 +869,22 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
 						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
 						"type": "bool"
 					}
 				],
@@ -1034,12 +929,22 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
 						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
 						"type": "bool"
 					}
 				],
@@ -1084,12 +989,22 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
 						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
 						"type": "bool"
 					}
 				],
@@ -1134,12 +1049,82 @@ export const abiEventify = `
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
 						"internalType": "bool",
 						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct structTicket.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchShortlistEvents",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isShortlistEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
 						"type": "bool"
 					}
 				],
@@ -1154,6 +1139,93 @@ export const abiEventify = `
 	{
 		"inputs": [],
 		"name": "host",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToExisting1155",
+		"outputs": [
+			{
+				"internalType": "enum structTicket.NftType",
+				"name": "nftType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "collectionName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "contractAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToExisting721",
+		"outputs": [
+			{
+				"internalType": "enum structTicket.NftType",
+				"name": "nftType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "collectionName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "contractAddress",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToShortlist",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -1201,12 +1273,22 @@ export const abiEventify = `
 			},
 			{
 				"internalType": "bool",
-				"name": "status",
+				"name": "isActive",
 				"type": "bool"
 			},
 			{
 				"internalType": "bool",
 				"name": "isPublished",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isShortlistEvent",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isExistingTicket",
 				"type": "bool"
 			}
 		],
@@ -1250,6 +1332,11 @@ export const abiEventify = `
 				"type": "uint256"
 			},
 			{
+				"internalType": "bool",
+				"name": "_openEvent",
+				"type": "bool"
+			},
+			{
 				"internalType": "string",
 				"name": "_tokenURI",
 				"type": "string"
@@ -1257,7 +1344,7 @@ export const abiEventify = `
 		],
 		"name": "mintTickets",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1339,6 +1426,19 @@ export const abiEventify = `
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -1348,7 +1448,48 @@ export const abiEventify = `
 		],
 		"name": "pauseActiveEvent",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_collectionName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_contract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_nftId",
+				"type": "uint256"
+			}
+		],
+		"name": "publishExistingNFT1155Tickets",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_collectionName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_contract",
+				"type": "address"
+			}
+		],
+		"name": "publishExistingNFT721Tickets",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1361,7 +1502,27 @@ export const abiEventify = `
 		],
 		"name": "publishTickets",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "pushFeaturedEvent",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1374,7 +1535,7 @@ export const abiEventify = `
 		],
 		"name": "runPausedEvent",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1464,6 +1625,25 @@ export const abiEventify = `
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "shortlistBuy",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "bytes4",
 				"name": "interfaceId",
 				"type": "bytes4"
@@ -1478,6 +1658,37 @@ export const abiEventify = `
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address[]",
+				"name": "_shortlist",
+				"type": "address[]"
+			}
+		],
+		"name": "updateShortlist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1502,4 +1713,327 @@ export const abiEventify = `
 ]
 `
 
-export const abiFeatured = ``
+export const abiFeatured = `
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_eventifyAddress",
+				"type": "address"
+			}
+		],
+		"name": "buyTicket",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_supply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_remaining",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "_status",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "_openEvent",
+				"type": "bool"
+			}
+		],
+		"name": "createFeaturedEvent",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchFeaturedEvents",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "featuredId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "openEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOver",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct structFeatured.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchPastFeaturedEvents",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "featuredId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "openEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isOver",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct structFeatured.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToTicket",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "featuredId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "supply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "remaining",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "ticketId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "status",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isPublished",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "openEvent",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isOver",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_featuredId",
+				"type": "uint256"
+			}
+		],
+		"name": "markAsOver",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+`

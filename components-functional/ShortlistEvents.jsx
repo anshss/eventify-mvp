@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import { fetchShortlistEvents, updateShortlist } from "../utils";
 
-export function ShortlistEvents(props) {
+export function ShortlistEvents() {
     const [activeEvents, setActiveEvents] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (props.username) {
-            fetchShortlistEventsData();
-        }
-    }, [props.username]);
+        fetchShortlistEventsData();
+    }, []);
 
     async function fetchShortlistEventsData() {
-        const data = await fetchShortlistEvents(props.username);
+        const data = await fetchShortlistEvents();
         setActiveEvents(data);
         setLoaded(true);
     }
 
     function NFTCard(prop) {
         async function updateShortlistCall(ticketId) {
-            await updateShortlist(ticketId);
+            await updateShortlist(ticketId, shortlistArray);
         }
 
         const [shortlistArray, setShortlistArray] = useState([])

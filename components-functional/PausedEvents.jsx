@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchPausedEvents, runEvent } from "../utils";
 
-export function PausedEvents(props) {
+export function PausedEvents() {
     const [pausedEvents, setPausedEvents] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (props.username) {
-            fetchPausedEventsData();
-        }
-    }, [props.username]);
+        fetchPausedEventsData();
+    }, []);
 
     async function fetchPausedEventsData() {
-        const data = await fetchPausedEvents(props.username);
+        const data = await fetchPausedEvents();
         setPausedEvents(data);
         setLoaded(true);
     }

@@ -50,10 +50,10 @@ export default function Dashboard() {
             DASHBOARD
             <p>Username: {username}</p>
             <CreateEvent />
-            <MintedCollection username={username} />
-            <ShortlistEvents username={username} />
-            <ActiveEvents username={username} />
-            <PausedEvents username={username} />
+            <MintedCollection />
+            <ShortlistEvents />
+            <ActiveEvents />
+            <PausedEvents />
             {/* <Domain /> */}
         </div>
     );

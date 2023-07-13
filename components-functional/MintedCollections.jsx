@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchMintedCollection, publishTickets } from "../utils";
 
-export function MintedCollection(props) {
+export function MintedCollection() {
     const [mintedCollection, setMintedCollection] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (props.username) {
-            fetchMintedCollectionData();
-        }
-    }, [props.username]);
+        fetchMintedCollectionData();
+    }, []);
 
     async function fetchMintedCollectionData() {
-        const data = await fetchMintedCollection(props.username);
+        const data = await fetchMintedCollection();
         setMintedCollection(data);
         setLoaded(true);
     }

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react";
-import { getContract, uploadToIPFS } from "../utils";
-import { ethers } from "ethers";
+import { mint, uploadToIPFS } from "../utils";
 
 export function CreateEvent() {
     const [formInput, setFormInput] = useState({
@@ -24,13 +23,10 @@ export function CreateEvent() {
         return url
     }
 
-    async function mint() {
+    async function onClickMint() {
         const NftURI = await formURI()
-        const contract = await getContract(true)
-        const price = ethers.utils.parseEther(formInput.price);
-        const tx = await contract.mintTicketsCall(price, formInput.supply, NftURI)
-        await tx.wait()
-        console.log("minted")
+        const privateEvent = false
+        await mint(formInput.price, formInput.supply, privateEvent, NftURI)
     }
 
     return (
@@ -96,7 +92,7 @@ export function CreateEvent() {
                 }
                 value={formInput.supply}
             />
-            <button onClick={mint}>Mint Collection</button>
+            <button onClick={onClickMint}>Mint Collection</button>
         </div>
     );
 }
