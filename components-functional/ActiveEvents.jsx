@@ -30,7 +30,7 @@ export function ActiveEvents() {
                 <p>Name: {prop.name}</p>
                 <p>Venue: {prop.venue}</p>
                 <p>Date: {prop.date}</p>
-                <p>Supply: {prop.supply}</p>
+                <p>Supply: {prop.remaining} / {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button onClick={() => pauseEventCall(prop.ticketId)}>
@@ -65,6 +65,7 @@ export function ActiveEvents() {
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
+                            remaining={nft.remaining}
                             price={nft.price}
                             // NftURI={nft.NftURI}
                         />

@@ -51,9 +51,9 @@ export default function Dashboard() {
             <p>Username: {username}</p>
             <CreateEvent />
             <MintedCollection />
-            <ShortlistEvents />
             <ActiveEvents />
             <PausedEvents />
+            <ShortlistEvents />
             {/* <Domain /> */}
         </div>
     );

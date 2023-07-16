@@ -8,8 +8,9 @@ export function CreateEvent() {
         venue: "test",
         date: "test",
         cover: "",
-        price: "10",
-        supply: "10"
+        price: "0.1",
+        supply: "10",
+        isPrivateEvent: false
     });
 
     async function formURI() {
@@ -25,8 +26,7 @@ export function CreateEvent() {
 
     async function onClickMint() {
         const NftURI = await formURI()
-        const isPrivateEvent = false
-        await mint(formInput.price, formInput.supply, isPrivateEvent, NftURI)
+        await mint(formInput.price, formInput.supply, formInput.isPrivateEvent, NftURI)
     }
 
     return (

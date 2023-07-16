@@ -49,7 +49,7 @@ export default function Events() {
                 <p>Name: {prop.name}</p>
                 <p>Venue: {prop.venue}</p>
                 <p>Date: {prop.date}</p>
-                <p>Supply: {prop.supply}</p>
+                <p>Supply: {prop.remaining} / {prop.supply}</p>
                 <p>Price: {prop.price}</p>
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button onClick={() => buyTicketCall(prop.ticketId, prop.price)}>Buy Ticket</button>
@@ -80,6 +80,7 @@ export default function Events() {
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
+                            remaining={nft.remaining}
                             price={nft.price}
                             // NftURI={nft.NftURI}
                         />

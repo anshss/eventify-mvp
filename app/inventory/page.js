@@ -52,6 +52,7 @@ export default function Inventory() {
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
+                            remaining={nft.remaining}
                             price={nft.price}
                             // NftURI={nft.NftURI}
                         />

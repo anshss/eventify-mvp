@@ -1,9 +1,64 @@
-const PolygonAddressFactory = `0x2D88d6925ff3102820E0bF872EE2Ffd2a15Aa186`
+const PolygonAddressFactory = `0x97395694D48cD37220Ac333855374211384F09fb`
 
 export const addressFactory = PolygonAddressFactory
 
 
 export const abiFactory = `[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "approveFeaturedEvents",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_username",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "buyTicketCall",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_username",
+				"type": "string"
+			}
+		],
+		"name": "deployEventify",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -48,6 +103,52 @@ export const abiFactory = `[
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_ticketId",
+				"type": "uint256"
+			}
+		],
+		"name": "raiseFeaturedEvents",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "setWhitelistOperator",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -65,6 +166,19 @@ export const abiFactory = `[
 		],
 		"name": "UserWhitelisted",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "whitelistUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -88,24 +202,6 @@ export const abiFactory = `[
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "host",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_ticketId",
-				"type": "uint256"
-			}
-		],
-		"name": "approveFeaturedEvents",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -123,25 +219,6 @@ export const abiFactory = `[
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_username",
-				"type": "string"
-			}
-		],
-		"name": "deployEventify",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "featuredEventsInstanceAddress",
 		"outputs": [
@@ -149,6 +226,77 @@ export const abiFactory = `[
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_username",
+				"type": "string"
+			}
+		],
+		"name": "fetchActiveEventsCall",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ticketId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPublished",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isPrivateEvent",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct structTicket.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -256,9 +404,9 @@ export const abiFactory = `[
 			{
 				"components": [
 					{
-						"internalType": "uint256",
-						"name": "featuredId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
 					},
 					{
 						"internalType": "uint256",
@@ -287,7 +435,7 @@ export const abiFactory = `[
 					},
 					{
 						"internalType": "bool",
-						"name": "status",
+						"name": "isActive",
 						"type": "bool"
 					},
 					{
@@ -297,8 +445,18 @@ export const abiFactory = `[
 					},
 					{
 						"internalType": "bool",
-						"name": "openEvent",
+						"name": "isPrivateEvent",
 						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isExistingTicket",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "featuredId",
+						"type": "uint256"
 					},
 					{
 						"internalType": "bool",
@@ -389,7 +547,7 @@ export const abiFactory = `[
 				"type": "address"
 			}
 		],
-		"name": "isWhitelistOperator",
+		"name": "isWhitelisted",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -408,7 +566,7 @@ export const abiFactory = `[
 				"type": "address"
 			}
 		],
-		"name": "isWhitelisted",
+		"name": "isWhitelistOperator",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -435,52 +593,6 @@ export const abiFactory = `[
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_ticketId",
-				"type": "uint256"
-			}
-		],
-		"name": "raiseFeaturedEvents",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_user",
-				"type": "address"
-			}
-		],
-		"name": "setWhitelistOperator",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "host",
 				"type": "address"
@@ -492,30 +604,6 @@ export const abiFactory = `[
 			}
 		],
 		"name": "uriCall",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "userToAllHostPurchased",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -568,13 +656,24 @@ export const abiFactory = `[
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_user",
+				"name": "",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "whitelistUser",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "userToAllHostPurchased",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]`

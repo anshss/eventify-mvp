@@ -169,7 +169,7 @@ export async function fetchFeaturedEventsWithInfura() {
     const data = await contract.fetchFeaturedEvents();
     const items = await Promise.all(
         data.map(async (i) => {
-            console.log(i)
+            // console.log(i)
             const tokenUri = await contract.uriCall(i.owner, i.ticketId.toString());
             // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
@@ -181,9 +181,10 @@ export async function fetchFeaturedEventsWithInfura() {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                cover: meta.data.cover
+                // cover: meta.data.cover
             };
             return item;
         })
@@ -208,6 +209,7 @@ export async function fetchActiveEventsWithInfura(username) {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 // cover: meta.data.cover
@@ -220,13 +222,14 @@ export async function fetchActiveEventsWithInfura(username) {
 }
 
 export async function fetchInventory(username) {
-    const contract = await getEventifyContract(username, false);
+    const contract = await getEventifyContract(username, true);
 
     const data = await contract.fetchPurchasedTickets();
+    console.log("data", data)
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
+            // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
@@ -235,6 +238,7 @@ export async function fetchInventory(username) {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 // cover: meta.data.cover
@@ -247,29 +251,33 @@ export async function fetchInventory(username) {
 }
 
 export async function fetchCommonInventory() {
-    const contract = await getFactoryContract();
+    const contract = await getFactoryContract(true);
 
     const data = await contract.fetchAllPurchasedTickets();
+    // console.log("data", data)
     const items = await Promise.all(
         data.map(async (i) => {
-            // const tokenUri = await contract.uriCall(id, i.ticketId.toString());
-            // console.log(tokenUri);
-            // const meta = await axios.get(tokenUri);
-            let price = ethers.utils.formatEther(i.price);
+            console.log("i", i)
+            // console.log("i", i[0].ticketId.toString())
+            const tokenUri = await contract.uriCall(i[0]?.owner, i[0]?.ticketId.toNumber());
+            console.log(tokenUri);
+            const meta = await axios.get(tokenUri);
+            let price = ethers.utils.formatEther(i[0].price);
             let item = {
-                ticketId: i.ticketId.toString(),
-                // name: meta.data.name,
-                // venue: meta.data.venue,
-                // date: meta.data.name,
-                supply: i.supply.toNumber(),
+                ticketId: i[0]?.ticketId.toString(),
+                name: meta.data.name,
+                venue: meta.data.venue,
+                date: meta.data.name,
+                supply: i[0]?.supply.toNumber(),
+                remaining: i[0]?.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                cover: meta.data.cover
             };
             return item;
         })
     );
-    console.log("Common Inventory", items);
+    console.log("Common Inventory", data);
     return items;
 }
 
@@ -306,7 +314,7 @@ export async function fetchMintedCollection() {
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
+            // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
@@ -315,6 +323,7 @@ export async function fetchMintedCollection() {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 // cover: meta.data.cover
@@ -334,7 +343,7 @@ export async function fetchShortlistEvents() {
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
+            // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
@@ -343,6 +352,7 @@ export async function fetchShortlistEvents() {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 // cover: meta.data.cover
@@ -362,7 +372,7 @@ export async function fetchActiveEvents() {
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
+            // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
@@ -371,6 +381,7 @@ export async function fetchActiveEvents() {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 // cover: meta.data.cover
@@ -390,7 +401,7 @@ export async function fetchPausedEvents() {
     const items = await Promise.all(
         data.map(async (i) => {
             const tokenUri = await contract.uri(i.ticketId.toString());
-            console.log(tokenUri);
+            // console.log(tokenUri);
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
@@ -399,6 +410,7 @@ export async function fetchPausedEvents() {
                 venue: meta.data.venue,
                 date: meta.data.name,
                 supply: i.supply.toNumber(),
+                remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
                 // cover: meta.data.cover
