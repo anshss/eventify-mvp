@@ -9,6 +9,7 @@ import { ShortlistEvents } from "../../components-functional/ShortlistEvents";
 import { ActiveEvents } from "../../components-functional/ActiveEvents";
 import { PausedEvents } from "../../components-functional/PausedEvents";
 import { Domain } from "../../components-functional/Domain";
+import DashboardMenu from "../../components/DashboardMenu";
 
 export default function Dashboard() {
     const [isDeployed, setIsDeployed] = useState();
@@ -47,13 +48,13 @@ export default function Dashboard() {
 
     return (
         <div>
-            DASHBOARD
-            <p>Username: {username}</p>
+            <DashboardMenu/>
+            {/* <p>Username: {username}</p>
             <CreateEvent />
             <MintedCollection />
             <ActiveEvents />
             <PausedEvents />
-            <ShortlistEvents />
+            <ShortlistEvents /> */}
             {/* <Domain /> */}
         </div>
     );

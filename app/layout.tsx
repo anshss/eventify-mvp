@@ -2,7 +2,6 @@
 import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Providers } from "./providers";
-import { Navbar } from "../components/Navbar";
 
 export default function RootLayout({
     children,
@@ -11,10 +10,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className="bg-background">
                 <Providers>
                     <>
-                        <Navbar />
                         {children}
                     </> 
                 </Providers>
