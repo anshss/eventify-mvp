@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import styles from '../../styles/style'
 import Link from 'next/link';
 
-export const NftCard = () => {
+export const NftDesign = (props) => {
   return (
 
 
@@ -24,18 +24,18 @@ export const NftCard = () => {
     <div className="flex-1 md:ml-[62px] flex flex-col max-w-[650px]">
 
       <h4 className="font-normal lg:text-[42px] text-[26px] text-white inline-block">
-        Mad Lads 
+        {props.name} 
         <h4 className='inline-block ml-2 mb-2 text-md'><FcApproval/></h4>
       </h4>
     
-      <h2 className="tracking-widest text-indigo-xs title-font font-medium text-gray-400">25 June </h2>
+      <h2 className="tracking-widest text-indigo-xs title-font font-medium text-gray-400">{props.date} </h2>
 
       <div className='grid grid-rows-2 grid-flow-col gap-4'>
         <div >
-        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">SUPPLY</span>
+        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">SUPPLY: {props.supply}</span>
         </div>
         <div>
-        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">REMAINING: 30</span>
+        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">REMAINING: {props.remaining}</span>
       
         </div>
         <div>

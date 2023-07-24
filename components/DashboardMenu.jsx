@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { NftCard } from "./icons/NftCard";
+import { NftCard, NftDesign } from "./icons/NftDesign";
+import { ActiveEvents } from "../components-functional/ActiveEvents";
 const DashboardMenu = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
@@ -53,7 +54,8 @@ const DashboardMenu = () => {
         </ul>
       </div>
       <div className="h-screen flex-1 p-7">
-        <NftCard/>
+        <ActiveEvents/>
+        
       </div>
     </div>
   );
