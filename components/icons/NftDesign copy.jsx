@@ -5,26 +5,8 @@ import {staggerContainer} from '../../utils/motion'
 import { motion } from 'framer-motion'
 import styles from '../../styles/style'
 import Link from 'next/link';
-import { buyTicket } from '../../utils';
 
-
-export const NftDesign = (props) => {
-
-  async function buyTicketCall(ticketId, price) {
-    await buyTicket(props.id, ticketId, price)
-  }
-
-  const handleButton = async (text) =>{
-    console.log(text)
-    switch (text) {
-      case "buynow":
-       await buyTicketCall(props.ticketId,props.price)
-        break;
-    
-      default:
-        break;
-    }
-  }
+export const NftDesignn = (props) => {
   return (
 
 
@@ -46,7 +28,7 @@ export const NftDesign = (props) => {
         <h4 className='inline-block ml-2 mb-2 text-md'><FcApproval/></h4>
       </h4>
     
-      <h2 className="tracking-widest text-indigo-xs title-font font-medium text-gray-400">{props.host} {props.date} </h2>
+      <h2 className="tracking-widest text-indigo-xs title-font font-medium text-gray-400">{props.date} </h2>
 
       <div className='grid grid-rows-2 grid-flow-col gap-4'>
         <div >
@@ -57,12 +39,12 @@ export const NftDesign = (props) => {
       
         </div>
         <div>
-        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">TICKET ID : {props.ticketId}</span>
+        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">TICKET TYPE</span>
 
       
         </div>
         <div>
-        <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">{props.price} MATIC</a>
+        <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">rahulkathuriaaa</a>
       
         </div>
       
@@ -78,10 +60,10 @@ export const NftDesign = (props) => {
       </p>
       
      
-      {/* <Link href="/"  className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+      <Link href="/"  className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
 
-      <button onClick={() => handleButton(props.button)}>{props.button}</button> 
-      </Link> */}
+      <button >Connect Wallet</button> 
+      </Link>
 
     </div>
   </div>

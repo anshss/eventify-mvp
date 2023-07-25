@@ -87,8 +87,8 @@ export function Navbar() {
                 )}
               >
                 <li>
-                  <Link href="/dashboard">Dashboard</Link>
-                </li>
+                <Link href="/request/featured" className="text-white">Featured request</Link>
+               </li>
                 <li>
                   <Link href="/featured">Featured events</Link>
                 </li>
@@ -96,7 +96,10 @@ export function Navbar() {
                   <Link href="#">Customers</Link>
                 </li> */}
                 <li className="md:hidden lg:block">
-                  <Link href="/dashboard">Docs</Link>
+                <Link href="/smashkx/events" className="text-white">Demo Events</Link>
+                </li>
+                <li className="md:hidden lg:block">
+                <Link href="/smashkx/inventory" className="text-white">Demo Inventory</Link>        
                 </li>
                 <li className="md:hidden lg:block">
                   <Link href="/inventory">Inventory</Link>
@@ -112,7 +115,7 @@ export function Navbar() {
             </Link> */}
               <button className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-xl border border-transparent bg-[#8A42D8] px-4 py-2 text-base text-[16px] text-white shadow-sm hover:bg-indigo-700 gap-[12px] mr-6 font-semibold">
                 <Link href="/dashboard" target="_blank">
-                Get Started
+                Host an Event
                 </Link>
                 </button> 
             <Login/>

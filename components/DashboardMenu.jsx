@@ -2,9 +2,10 @@ import { useState } from "react";
 import { NftCard, NftDesign } from "./icons/NftDesign";
 import { ActiveEvents } from "../components-functional/ActiveEvents";
 import { MintedCollection } from "../components-functional/MintedCollections";
+import DashboardForm from "./DashboardForm";
 const DashboardMenu = () => {
   const [open, setOpen] = useState(true);
-  const [menuVisible, setmenuVisible] = useState("Active")
+  const [menuVisible, setmenuVisible] = useState("Dashboard")
   const renderComponent = () =>{
     if (menuVisible == "Active") {
       // <ActiveEvents/>
@@ -23,9 +24,8 @@ const DashboardMenu = () => {
   }
   else if (menuVisible == "Dashboard") {
     return(
-    <div className="text-white">
-      Dashboard
-      </div>
+      <DashboardForm/>
+
     )
   }
   

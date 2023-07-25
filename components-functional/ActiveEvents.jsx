@@ -39,10 +39,10 @@ export function ActiveEvents() {
                             // NftURI={nft.NftURI}
                         />
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => pauseEventCall(prop.ticketId)}>
+                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] " onClick={() => pauseEventCall(prop.ticketId)}>
                     Pause
                 </button>
-                <button onClick={() => featureEventCall(prop.ticketId)}>
+                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] " onClick={() => featureEventCall(prop.ticketId)}>
                     Feature
                 </button>
             </div>

@@ -48,7 +48,10 @@ export default function Dashboard() {
 
     return (
         <div>
-            <DashboardMenu/>
+            <DashboardMenu 
+                isDeployed={isDeployed}
+                loaded={loaded}
+            />
             {/* <p>Username: {username}</p>
             <CreateEvent />
             <MintedCollection />

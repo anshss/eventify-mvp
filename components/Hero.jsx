@@ -63,6 +63,7 @@ const Hero = () => {
 
       <div className={`flex-1 flex flex justify-center items-center md:my-10 my-10 relative`}>
       {/* <Spline scene='https://prod.spline.design/ERAf0a0BFZr6ZJoI/scene.splinecode'/> */}
+      {/* app.load('https://prod.spline.design/ERAf0a0BFZr6ZJoI/scene.splinecode'); */}
 
 
       </div>
