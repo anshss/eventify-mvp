@@ -1,5 +1,5 @@
 "use client";
-import { checkWhitelist, whitelistUser } from "../../../utils";
+import { fetchIfWhitelist, whitelistUser } from "../../../utils";
 import { useState } from "react";
 
 export default function Whitelist() {
@@ -7,7 +7,7 @@ export default function Whitelist() {
     const [isWhitelist, setIsWhitelist] = useState();
 
     async function checkWhitelistData() {
-        const data = await checkWhitelist(formInput);
+        const data = await fetchIfWhitelist(formInput);
         setIsWhitelist(data);
     }
 
