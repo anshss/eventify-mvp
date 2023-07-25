@@ -74,7 +74,7 @@ export const NftDesign = (props) => {
       
 
       <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
-      Fock it.
+      Kong vs Goatzilla
       </p>
       
      

@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import {Navbar} from '../components/Navbar'
 import Hero from "../components/Hero";
@@ -10,7 +11,7 @@ import Services from '../components/Services'
 export default function Home() {
     return(
       
-      <div className="flex flex-col min-h-screen text-white ">
+      <div className="flex flex-col min-h-screen text-white scrollbar-w-2 scrollbar-track-gray-200 scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700">
         <Navbar/>
         <br />
         <br />
@@ -30,7 +31,7 @@ export default function Home() {
       <Container>
         <Clients/>
         </Container>
-        <Services/>
+        {/* <Services/> */}
         <br />
         <br />
         <br />

@@ -1,7 +1,7 @@
 "use-client"
+import Spline from '@splinetool/react-spline';
 import React from 'react';
 // import Spline from '@splinetool/react-spline';
-
 
 const Hero = () => {
   return (
@@ -54,7 +54,8 @@ const Hero = () => {
             Introducing <span className='text-[#8A42D8]'>Eventify</span>
           </h1>
           <p className={`text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] mt-2 text-white-100`}>
-          An Uber model for building           NFT-based event tickets. 
+          Seamless granular events hosting with NFT tickets.
+ 
  <br className='sm:block hidden' />
           </p>
         </div>
@@ -64,7 +65,7 @@ const Hero = () => {
       <div className={`flex-1 flex flex justify-center items-center md:my-10 my-10 relative`}>
       {/* <Spline scene='https://prod.spline.design/ERAf0a0BFZr6ZJoI/scene.splinecode'/> */}
       {/* app.load('https://prod.spline.design/ERAf0a0BFZr6ZJoI/scene.splinecode'); */}
-
+      <Spline scene = "https://prod.spline.design/ERAf0a0BFZr6ZJoI/scene.splinecode"/>
 
       </div>
 

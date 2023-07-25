@@ -73,6 +73,7 @@ export function ActiveEvents() {
                             supply={nft.supply}
                             remaining={nft.remaining}
                             price={nft.price}
+                            
                             // NftURI={nft.NftURI}
                         />
                     );
