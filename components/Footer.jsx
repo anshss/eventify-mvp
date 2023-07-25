@@ -107,12 +107,13 @@ export const socialMedia = [
 //   },[])
 
 // }
-// const scrollUp = () =>{
-//   window.scrollTo({
-//     top:0,
-//     behavior: "smooth"
-//   })
-// }
+
+const scrollUp = () =>{
+  window.scrollTo({
+    top:0,
+    behavior: "smooth"
+  })
+}
 const Footer = () => (
     <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
         <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>

@@ -7,16 +7,16 @@ import { Navbar } from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import { textContainer, textVariant2 } from '../../../utils/motion';
 import { motion } from 'framer-motion';
-export const TitleText = ({ title, textStyles }) => (
-    <motion.h2
-      variants={textVariant2}
-      initial="hidden"
-      whileInView="show"
-      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
-    >
-      {title}
-    </motion.h2>
-  );
+// export const TitleText = ({ title, textStyles }) => (
+//     <motion.h2
+//       variants={textVariant2}
+//       initial="hidden"
+//       whileInView="show"
+//       className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+//     >
+//       {title}
+//     </motion.h2>
+//   );
 export default function Events() {
 
     const pathName = usePathname();
@@ -121,4 +121,19 @@ export default function Events() {
             </div>
         </div>
     )
+}
+
+function TitleText({ title, textStyles }) {
+    return (
+        <div>
+            <motion.h2
+                variants={textVariant2}
+                initial="hidden"
+                whileInView="show"
+                className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+            >
+                {title}
+            </motion.h2>
+        </div>
+    );
 }

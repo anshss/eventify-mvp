@@ -2,29 +2,29 @@
 import { Navbar } from "../../components/Navbar";
 import { fetchCommonInventory } from "../../utils";
 import { useEffect, useState } from "react";
-import { textContainer, textVariant2 } from '../../utils/motion';
-import { motion } from 'framer-motion';
+import { textContainer, textVariant2 } from "../../utils/motion";
+import { motion } from "framer-motion";
 import { NftDesign } from "../../components/icons/NftDesign";
-export const TitleText = ({ title, textStyles }) => (
-    <motion.h2
-      variants={textVariant2}
-      initial="hidden"
-      whileInView="show"
-      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
-    >
-      {title}
-    </motion.h2>
-  );
-export const SubText = ({ title, textStyles }) => (
-    <motion.h5
-      variants={textVariant2}
-      initial="hidden"
-      whileInView="show"
-      className={`mt-[8px] font-bold md:text-[24px] text-[20px] text-white ${textStyles}`}
-    >
-      {title}
-    </motion.h5>
-  );
+// export const TitleText = ({ title, textStyles }) => (
+//     <motion.h2
+//       variants={textVariant2}
+//       initial="hidden"
+//       whileInView="show"
+//       className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+//     >
+//       {title}
+//     </motion.h2>
+//   );
+// export const SubText = ({ title, textStyles }) => (
+//     <motion.h5
+//       variants={textVariant2}
+//       initial="hidden"
+//       whileInView="show"
+//       className={`mt-[8px] font-bold md:text-[24px] text-[20px] text-white ${textStyles}`}
+//     >
+//       {title}
+//     </motion.h5>
+//   );
 export default function Inventory() {
     const [inventoryData, setInventoryData] = useState();
     const [loaded, setLoaded] = useState(false);
@@ -56,9 +56,7 @@ export default function Inventory() {
                     supply={prop.supply}
                     price={prop.price}
                     remaining={prop.remaining}
-                    
                 />
-                
             </div>
         );
     }
@@ -67,23 +65,24 @@ export default function Inventory() {
 
     if (loaded == true && inventoryData.length == 0)
         return (
-            
             <div className="text-white">
-                <Navbar/>
+                <Navbar />
                 <br />
                 <br />
                 <br />
                 <br />
-                <TitleText title={<>Purchased Tickets </>} textStyles="text-center" />  
+                <TitleText
+                    title={<>Purchased Tickets </>}
+                    textStyles="text-center"
+                />
                 {/* PURCHASED TICKETS */}
-                 <SubText title={<>No events </>} textStyles="text-center" />  
+                <SubText title={<>No events </>} textStyles="text-center" />
             </div>
         );
 
     return (
         <div>
-            <Navbar/>
-            
+            <Navbar />
             PURCHASED TICKETS
             <div>
                 {inventoryData.map((nft, i) => {
@@ -102,6 +101,36 @@ export default function Inventory() {
                     );
                 })}
             </div>
+        </div>
+    );
+}
+
+function TitleText({ title, textStyles }) {
+    return (
+        <div>
+            <motion.h2
+                variants={textVariant2}
+                initial="hidden"
+                whileInView="show"
+                className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+            >
+                {title}
+            </motion.h2>
+        </div>
+    );
+}
+
+function SubText({ title, textStyles }) {
+    return (
+        <div>
+            <motion.h5
+                variants={textVariant2}
+                initial="hidden"
+                whileInView="show"
+                className={`mt-[8px] font-bold md:text-[24px] text-[20px] text-white ${textStyles}`}
+            >
+                {title}
+            </motion.h5>
         </div>
     );
 }

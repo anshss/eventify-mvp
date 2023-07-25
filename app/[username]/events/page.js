@@ -1,37 +1,38 @@
-'use client'
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { fetchUsernameValidity, fetchActiveEventsWithInfura, buyTicket } from "../../../utils";
-import { NftDesign } from '../../../components/icons/NftDesign';
-import { motion } from 'framer-motion';
-import { textContainer, textVariant2 } from '../../../utils/motion';
-import { Navbar } from '../../../components/Navbar';
-
-export const TitleText = ({ title, textStyles }) => (
-    <motion.h2
-      variants={textVariant2}
-      initial="hidden"
-      whileInView="show"
-      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
-    >
-      {title}
-    </motion.h2>
-  );
-
+"use client";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+    fetchUsernameValidity,
+    fetchActiveEventsWithInfura,
+    buyTicket,
+} from "../../../utils";
+import { NftDesign } from "../../../components/icons/NftDesign";
+import { motion } from "framer-motion";
+import { textContainer, textVariant2 } from "../../../utils/motion";
+import { Navbar } from "../../../components/Navbar";
+// export const TitleText = ({ title, textStyles }) => (
+//     <motion.h2
+//       variants={textVariant2}
+//       initial="hidden"
+//       whileInView="show"
+//       className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+//     >
+//       {title}
+//     </motion.h2>
+//   );
 export default function Events() {
-
     const pathName = usePathname();
 
     const id = pathName?.split("/")[1];
 
-    const [buttonText, setbuttonText] = useState("")
+    const [buttonText, setbuttonText] = useState("");
     const [activeEvents, setActiveEvents] = useState([]);
-    const [isUsernameValid, setIsUsernameValid] = useState(false)
-    const [loaded, setLoaded] = useState(false)
+    const [isUsernameValid, setIsUsernameValid] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
-    useEffect(()=>{
-        setbuttonText('buynow')
-    },[])
+    useEffect(() => {
+        setbuttonText("buynow");
+    }, []);
 
     useEffect(() => {
         if (id) {
@@ -40,27 +41,26 @@ export default function Events() {
     }, [id]);
 
     useEffect(() => {
-        if(isUsernameValid == true) {
-            fetchActiveEventsData()
+        if (isUsernameValid == true) {
+            fetchActiveEventsData();
         }
-    }, [isUsernameValid])
-
+    }, [isUsernameValid]);
 
     async function checkUsernameValidityData() {
-        const data = await fetchUsernameValidity(id)
-        setIsUsernameValid(data)
+        const data = await fetchUsernameValidity(id);
+        setIsUsernameValid(data);
     }
 
     async function fetchActiveEventsData() {
-        const data = await fetchActiveEventsWithInfura(id)
+        const data = await fetchActiveEventsWithInfura(id);
         setActiveEvents(data);
-        setLoaded(true)
-        console.log("user host: ", id)
+        setLoaded(true);
+        console.log("user host: ", id);
     }
 
     function NFTCard(prop) {
         async function buyTicketCall(ticketId, price) {
-            await buyTicket(id, ticketId, price)
+            await buyTicket(id, ticketId, price);
         }
 
         return (
@@ -82,34 +82,40 @@ export default function Events() {
                     button={buttonText}
                     id={id}
                 />
-                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] " onClick={() => buyTicketCall(prop.ticketId, prop.price)}>Buy Ticket</button>
+                <button
+                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] "
+                    onClick={() => buyTicketCall(prop.ticketId, prop.price)}
+                >
+                    Buy Ticket
+                </button>
             </div>
         );
     }
 
-    if (loaded == false) return <div className='text-white'>Fetching..</div>
+    if (loaded == false) return <div className="text-white">Fetching..</div>;
 
-    if (loaded == true && isUsernameValid == false) return (
-        <div className='text-white'>User do not exist</div>
-    )
+    if (loaded == true && isUsernameValid == false)
+        return <div className="text-white">User do not exist</div>;
 
-    if (loaded == true && isUsernameValid == true && activeEvents.length == 0) return (
-        <div className='text-white'>ACTIVE EVENTS <br /> No events</div>
-    )
+    if (loaded == true && isUsernameValid == true && activeEvents.length == 0)
+        return (
+            <div className="text-white">
+                ACTIVE EVENTS <br /> No events
+            </div>
+        );
 
-    return(
-
+    return (
         <div>
-            <Navbar/>
+            <Navbar />
             <br />
             <br />
             <br />
             <br />
-                  <TitleText title={<>Events of {id}</>} textStyles="text-center" />       
+            <TitleText title={<>Events of {id}</>} textStyles="text-center" />
 
             {/* Events of {id} */}
             <div>
-            {activeEvents.map((nft, i) => {
+                {activeEvents.map((nft, i) => {
                     return (
                         <NFTCard
                             key={i}
@@ -126,5 +132,20 @@ export default function Events() {
                 })}
             </div>
         </div>
-    )
+    );
+}
+
+function TitleText({ title, textStyles }) {
+    return (
+        <div>
+            <motion.h2
+                variants={textVariant2}
+                initial="hidden"
+                whileInView="show"
+                className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+            >
+                {title}
+            </motion.h2>
+        </div>
+    );
 }
