@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchMintedCollection, publishTickets } from "../utils";
+import { NftDesign } from "../components/icons/NftDesign";
+
 
 export function MintedCollection() {
     const [mintedCollection, setMintedCollection] = useState([]);
@@ -22,12 +24,23 @@ export function MintedCollection() {
 
         return (
             <div className="text-black mb-5 mt-5">
-                <p>Nft card</p>
+                {/* <p>Nft card</p>
                 <p>Name: {prop.name}</p>
                 <p>Venue: {prop.venue}</p>
                 <p>Date: {prop.date}</p>
                 <p>Supply: {prop.supply}</p>
-                <p>Price: {prop.price}</p>
+                <p>Price: {prop.price}</p> */}
+                               <NftDesign
+                            // key={i}
+                            ticketId={prop.ticketId}
+                            name={prop.name}
+                            venue={prop.venue}
+                            date={prop.date}
+                            supply={prop.supply}
+                            remaining={prop.remaining}
+                            price={prop.price}
+                            // NftURI={nft.NftURI}
+                        />
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button onClick={() => publishTicketsCall(prop.tokenId)}>
                     Publish

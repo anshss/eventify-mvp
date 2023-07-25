@@ -1,8 +1,35 @@
 import { useState } from "react";
 import { NftCard, NftDesign } from "./icons/NftDesign";
 import { ActiveEvents } from "../components-functional/ActiveEvents";
+import { MintedCollection } from "../components-functional/MintedCollections";
 const DashboardMenu = () => {
   const [open, setOpen] = useState(true);
+  const [menuVisible, setmenuVisible] = useState("Active")
+  const renderComponent = () =>{
+    if (menuVisible == "Active") {
+      // <ActiveEvents/>
+      return(
+
+       <ActiveEvents/>
+        )
+    }
+  else if (menuVisible == "Minited Collection") {
+    return(
+
+      <MintedCollection/>
+    )
+    
+
+  }
+  else if (menuVisible == "Dashboard") {
+    return(
+    <div className="text-white">
+      Dashboard
+      </div>
+    )
+  }
+  
+  }
   const Menus = [
     { title: "Dashboard", src: "Chart_fill" },
     { title: "Minited Collection", src: "Chat" },
@@ -38,6 +65,8 @@ const DashboardMenu = () => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
+
+
             <li
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
@@ -46,15 +75,32 @@ const DashboardMenu = () => {
               } `}
             >
               <img src={`/${Menu.src}.png`} />
+
+              <button onClick={()=>{
+                setmenuVisible(Menu.title)
+                console.log(Menu.title)
+              }}>
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>
+              </button>
             </li>
           ))}
         </ul>
       </div>
       <div className="h-screen flex-1 p-7">
-        <ActiveEvents/>
+
+
+        {renderComponent()}
+      
+
+        {/* // menuVisible == "Active" ?<ActiveEvents/>  : <div className="text-white">Dashboard</div>   */}
+
+
+
+
+          
+        
         
       </div>
     </div>
