@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPausedEvents, runEvent } from "../utils";
+import { NftDesign } from "../components/icons/NftDesign";
 
 export function PausedEvents() {
     const [pausedEvents, setPausedEvents] = useState([]);
@@ -30,17 +31,22 @@ export function PausedEvents() {
                 <p>Price: {prop.price}</p> */}
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <NftDesign
-                            // key={i}
-                            ticketId={prop.ticketId}
-                            name={prop.name}
-                            venue={prop.venue}
-                            date={prop.date}
-                            supply={prop.supply}
-                            remaining={prop.remaining}
-                            price={prop.price}
-                            // NftURI={nft.NftURI}
-                        />
-                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] " onClick={() => runEventCall(prop.tokenId)}>Run</button>
+                    // key={i}
+                    ticketId={prop.ticketId}
+                    name={prop.name}
+                    venue={prop.venue}
+                    date={prop.date}
+                    supply={prop.supply}
+                    remaining={prop.remaining}
+                    price={prop.price}
+                    image={prop.image}
+                />
+                <button
+                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] "
+                    onClick={() => runEventCall(prop.tokenId)}
+                >
+                    Run
+                </button>
             </div>
         );
     }
@@ -55,7 +61,7 @@ export function PausedEvents() {
         );
 
     return (
-        <div >
+        <div>
             PAUSED EVENTS
             <div>
                 {pausedEvents.map((nft, i) => {
@@ -69,7 +75,7 @@ export function PausedEvents() {
                             supply={nft.supply}
                             remaining={nft.remaining}
                             price={nft.price}
-                            // NftURI={nft.NftURI}
+                            image={nft.image || ""}
                         />
                     );
                 })}

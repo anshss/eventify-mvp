@@ -326,7 +326,7 @@ export async function fetchMintedCollection() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image
             };
             return item;
         })
@@ -355,7 +355,7 @@ export async function fetchShortlistEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image
             };
             return item;
         })
@@ -384,7 +384,7 @@ export async function fetchActiveEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image
             };
             return item;
         })
@@ -413,7 +413,7 @@ export async function fetchPausedEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image
             };
             return item;
         })

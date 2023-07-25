@@ -39,7 +39,7 @@ export function MintedCollection() {
                             supply={prop.supply}
                             remaining={prop.remaining}
                             price={prop.price}
-                            // NftURI={nft.NftURI}
+                            image={prop.image}
                         />
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] " onClick={() => publishTicketsCall(prop.tokenId)}>
@@ -72,6 +72,7 @@ export function MintedCollection() {
                             supply={nft.supply}
                             price={nft.price}
                             NftURI={nft.NftURI}
+                            image={nft.image || ""}
                         />
                     );
                 })}

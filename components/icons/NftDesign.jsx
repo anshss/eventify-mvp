@@ -35,7 +35,8 @@ export const NftDesign = (props) => {
     
     
     <img
-      src="/madlads.jpg"
+      // src="/madlads.jpg"
+      src={props.image || "madlads.jpg"}
       className="md:w-[270px] w-full h-[250px] rounded-md object-cover"
     />
     <div className="w-full flex justify-between items-center">
@@ -73,9 +74,9 @@ export const NftDesign = (props) => {
       
       
 
-      <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
+      {/* <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
       Kong vs Goatzilla
-      </p>
+      </p> */}
       
      
       {/* <Link href="/"  className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">

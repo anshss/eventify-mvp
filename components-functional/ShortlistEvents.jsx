@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchShortlistEvents, updateShortlist } from "../utils";
+import { NftDesign } from "../components/icons/NftDesign";
 
 export function ShortlistEvents() {
     const [activeEvents, setActiveEvents] = useState([]);
@@ -20,18 +21,36 @@ export function ShortlistEvents() {
             await updateShortlist(ticketId, shortlistArray);
         }
 
-        const [shortlistArray, setShortlistArray] = useState([])
+        const [shortlistArray, setShortlistArray] = useState([]);
 
         return (
             <div className="text-black mb-5 mt-5">
-                <p>Nft card</p>
+                {/* <p>Nft card</p>
                 <p>Name: {prop.name}</p>
                 <p>Venue: {prop.venue}</p>
                 <p>Date: {prop.date}</p>
                 <p>Supply: {prop.remaining} / {prop.supply}</p>
-                <p>Price: {prop.price}</p>
+                <p>Price: {prop.price}</p> */}
+
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <input name="shortlistInput" placeholder="address" onChange={e => setShortlistArray(...shortlistArray, e.target.value)} />
+                <NftDesign
+                    // key={i}
+                    ticketId={prop.ticketId}
+                    name={prop.name}
+                    venue={prop.venue}
+                    date={prop.date}
+                    supply={prop.supply}
+                    remaining={prop.remaining}
+                    price={prop.price}
+                    image={prop.image}
+                />
+                <input
+                    name="shortlistInput"
+                    placeholder="address"
+                    onChange={(e) =>
+                        setShortlistArray(...shortlistArray, e.target.value)
+                    }
+                />
                 <button onClick={() => updateShortlistCall(prop.ticketId)}>
                     Update
                 </button>
@@ -63,6 +82,7 @@ export function ShortlistEvents() {
                             supply={nft.supply}
                             remaining={nft.remaining}
                             price={nft.price}
+                            image={nft.image || ""}
                             // NftURI={nft.NftURI}
                         />
                     );

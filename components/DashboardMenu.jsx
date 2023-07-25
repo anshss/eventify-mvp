@@ -50,9 +50,9 @@ const DashboardMenu = () => {
     { title: "Active", src: "User", gap: true },
     { title: "Pause", src: "Calendar" },
     { title: "Shortlist", src: "Search" },
-    { title: "Analytics", src: "Chart" },
-    { title: "Files ", src: "Folder", gap: true },
-    { title: "Setting", src: "Setting" },
+    // { title: "Analytics", src: "Chart" },
+    // { title: "Files ", src: "Folder", gap: true },
+    // { title: "Setting", src: "Setting" },
   ];
 
   return (
