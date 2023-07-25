@@ -1,7 +1,7 @@
 "use client";
 import { fetchFeaturedRequest, approveFeaturedRequest } from "../../../utils";
 import { useEffect, useState } from "react";
-import { NftDesign} from "../../../components/icons/NftDesign";
+import { FeaturedRequest} from "../../../components/icons/FeaturedRequest";
 import { Navbar } from "../../../components/Navbar";
 import { textContainer, textVariant2 } from '../../../utils/motion';
 import { motion } from 'framer-motion';
@@ -43,14 +43,14 @@ export default function Featured() {
                 {/* <p>Nft card</p>
                 <p>host: {prop.host}</p>
                 <p>ticketId: {prop.ticketId}</p> */}
-                  <NftDesign
+                  <FeaturedRequest
                             // key={i}
                             host={prop.host}
                             ticketId={prop.ticketId}
                             
                             // NftURI={nft.NftURI}
                         />
-                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] " 
+                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[108px] " 
                     onClick={() => approveCall(prop.host, prop.ticketId)}
                 >
                     Approve
