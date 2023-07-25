@@ -77,9 +77,11 @@ export default function Events() {
                     venue={prop.venue}
                     date={prop.date}
                     supply={prop.supply}
-                    price={prop.price}
                     remaining={prop.remaining}
-                    button={buttonText}
+                    price={prop.price}
+                    host={prop.host}
+                    image={prop.image}
+                    eventType={prop.eventType}
                     id={id}
                 />
                 <button
@@ -120,13 +122,15 @@ export default function Events() {
                         <NFTCard
                             key={i}
                             ticketId={nft.ticketId}
+                            host={nft.host}
                             name={nft.name}
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
                             remaining={nft.remaining}
                             price={nft.price}
-                            // NftURI={nft.NftURI}
+                            image={nft.image || ""}
+                            eventType={nft.eventType}
                         />
                     );
                 })}

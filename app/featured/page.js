@@ -49,9 +49,11 @@ export default function Featured() {
                     venue={prop.venue}
                     date={prop.date}
                     supply={prop.supply}
-                    price={prop.price}
                     remaining={prop.remaining}
-                    
+                    price={prop.price}
+                    host={prop.host}
+                    image={prop.image}
+                    eventType={prop.eventType}
                 />
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] " 
@@ -87,15 +89,16 @@ export default function Featured() {
                     return (
                         <NFTCard
                             key={i}
-                            host={nft.host}
                             ticketId={nft.ticketId}
+                            host={nft.host}
                             name={nft.name}
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
                             remaining={nft.remaining}
                             price={nft.price}
-                            // NftURI={nft.NftURI}
+                            image={nft.image || ""}
+                            eventType={nft.eventType}
                         />
                     );
                 })}

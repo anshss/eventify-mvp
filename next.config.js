@@ -10,7 +10,7 @@ const nextConfig = {
     net: 'empty',
     tls: 'empty',
     'crypto': 'empty'
-},
+}
 };
 
 module.exports = nextConfig;

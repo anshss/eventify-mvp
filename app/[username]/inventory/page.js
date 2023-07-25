@@ -71,9 +71,12 @@ export default function Events() {
                     venue={prop.venue}
                     date={prop.date}
                     supply={prop.supply}
-                    price={prop.price}
                     remaining={prop.remaining}
-                    
+                    price={prop.price}
+                    host={prop.host}
+                    image={prop.image}
+                    eventType={prop.eventType}
+                    id={id}
                 />
                 <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] "  onClick={() => buyTicketCall(prop.ticketId, prop.price)}>Buy Ticket</button>
             </div>
@@ -107,13 +110,15 @@ export default function Events() {
                         <NFTCard
                             key={i}
                             ticketId={nft.ticketId}
+                            host={nft.host}
                             name={nft.name}
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
-                            price={nft.price}
                             remaining={nft.remaining}
-                            // NftURI={nft.NftURI}
+                            price={nft.price}
+                            image={nft.image || ""}
+                            eventType={nft.eventType}
                         />
                     );
                 })}

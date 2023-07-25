@@ -184,7 +184,10 @@ export async function fetchFeaturedEventsWithInfura() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -205,6 +208,7 @@ export async function fetchActiveEventsWithInfura(username) {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 ticketId: i.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -212,7 +216,10 @@ export async function fetchActiveEventsWithInfura(username) {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -234,6 +241,7 @@ export async function fetchInventory(username) {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 ticketId: i.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -241,7 +249,10 @@ export async function fetchInventory(username) {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                // cover: meta.data.cover
+                image: meta.data.image,
+                eventType: i.isPrivateEvent.toString(),
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -265,6 +276,7 @@ export async function fetchCommonInventory() {
             let price = ethers.utils.formatEther(i[0].price);
             let item = {
                 ticketId: i[0]?.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -272,7 +284,10 @@ export async function fetchCommonInventory() {
                 remaining: i[0]?.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                cover: meta.data.cover
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -319,6 +334,7 @@ export async function fetchMintedCollection() {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 tokenId: i.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -326,7 +342,10 @@ export async function fetchMintedCollection() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                image: meta.data.image
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -348,6 +367,7 @@ export async function fetchShortlistEvents() {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 ticketId: i.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -355,7 +375,10 @@ export async function fetchShortlistEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                image: meta.data.image
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -377,6 +400,7 @@ export async function fetchActiveEvents() {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 ticketId: i.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -384,7 +408,10 @@ export async function fetchActiveEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                image: meta.data.image
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })
@@ -406,6 +433,7 @@ export async function fetchPausedEvents() {
             let price = ethers.utils.formatEther(i.price);
             let item = {
                 tokenId: i.ticketId.toString(),
+                host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
                 date: meta.data.name,
@@ -413,7 +441,10 @@ export async function fetchPausedEvents() {
                 remaining: i.remaining.toNumber(),
                 price,
                 NftURI: tokenUri,
-                image: meta.data.image
+                image: meta.data.image,
+                eventType: i.isPrivateEvent,
+                ticketType: i.nftType,
+                isExistingTicket: i.isExistingTicket,
             };
             return item;
         })

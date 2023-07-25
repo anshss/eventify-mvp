@@ -30,18 +30,17 @@ export function MintedCollection() {
                 <p>Date: {prop.date}</p>
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p> */}
-                               <NftDesign
-                            // key={i}
-                            ticketId={prop.ticketId}
-                            name={prop.name}
-                            venue={prop.venue}
-                            date={prop.date}
-                            supply={prop.supply}
-                            remaining={prop.remaining}
-                            price={prop.price}
-                            image={prop.image}
-                        />
-                {/* <p>NftURI: {prop.NftUri}</p> */}
+                <NftDesign
+                    name={prop.name}
+                    venue={prop.venue}
+                    date={prop.date}
+                    supply={prop.supply}
+                    remaining={prop.remaining}
+                    price={prop.price}
+                    host={prop.host}
+                    image={prop.image}
+                    eventType={prop.eventType}
+                />
                 <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] " onClick={() => publishTicketsCall(prop.tokenId)}>
                     Publish
                 </button>
@@ -65,14 +64,16 @@ export function MintedCollection() {
                     return (
                         <NFTCard
                             key={i}
-                            tokenId={nft.tokenId}
+                            ticketId={nft.ticketId}
+                            host={nft.host}
                             name={nft.name}
                             venue={nft.venue}
                             date={nft.date}
                             supply={nft.supply}
+                            remaining={nft.remaining}
                             price={nft.price}
-                            NftURI={nft.NftURI}
                             image={nft.image || ""}
+                            eventType={nft.eventType}
                         />
                     );
                 })}

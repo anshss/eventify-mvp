@@ -76,6 +76,7 @@ export function ShortlistEvents() {
                         <NFTCard
                             key={i}
                             ticketId={nft.ticketId}
+                            host={nft.host}
                             name={nft.name}
                             venue={nft.venue}
                             date={nft.date}
@@ -83,7 +84,7 @@ export function ShortlistEvents() {
                             remaining={nft.remaining}
                             price={nft.price}
                             image={nft.image || ""}
-                            // NftURI={nft.NftURI}
+                            eventType={nft.eventType}
                         />
                     );
                 })}

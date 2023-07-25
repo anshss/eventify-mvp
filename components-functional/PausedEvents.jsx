@@ -31,15 +31,15 @@ export function PausedEvents() {
                 <p>Price: {prop.price}</p> */}
                 {/* <p>NftURI: {prop.NftUri}</p> */}
                 <NftDesign
-                    // key={i}
-                    ticketId={prop.ticketId}
                     name={prop.name}
                     venue={prop.venue}
                     date={prop.date}
                     supply={prop.supply}
                     remaining={prop.remaining}
                     price={prop.price}
+                    host={prop.host}
                     image={prop.image}
+                    eventType={prop.eventType}
                 />
                 <button
                     className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] "
@@ -68,7 +68,8 @@ export function PausedEvents() {
                     return (
                         <NFTCard
                             key={i}
-                            tokenId={nft.tokenId}
+                            ticketId={nft.ticketId}
+                            host={nft.host}
                             name={nft.name}
                             venue={nft.venue}
                             date={nft.date}
@@ -76,6 +77,7 @@ export function PausedEvents() {
                             remaining={nft.remaining}
                             price={nft.price}
                             image={nft.image || ""}
+                            eventType={nft.eventType}
                         />
                     );
                 })}
