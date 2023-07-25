@@ -42,14 +42,14 @@ export function MintedCollection() {
                             // NftURI={nft.NftURI}
                         />
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => publishTicketsCall(prop.tokenId)}>
+                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] " onClick={() => publishTicketsCall(prop.tokenId)}>
                     Publish
                 </button>
             </div>
         );
     }
 
-    if (loaded == false) return <div>Fetching..</div>;
+    if (loaded == false) return <div className="text-white">Fetching..</div>;
 
     if (loaded == true && mintedCollection.length == 0)
         return (

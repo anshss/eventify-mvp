@@ -21,30 +21,41 @@ export function PausedEvents() {
         }
 
         return (
-            <div className="text-black mb-5 mt-5">
-                <p>Nft card</p>
+            <div className="text-white mb-5 mt-5">
+                {/* <p>Nft card</p>
                 <p>Name: {prop.name}</p>
                 <p>Venue: {prop.venue}</p>
                 <p>Date: {prop.date}</p>
                 <p>Supply: {prop.remaining} / {prop.supply}</p>
-                <p>Price: {prop.price}</p>
+                <p>Price: {prop.price}</p> */}
                 {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => runEventCall(prop.tokenId)}>Run</button>
+                <NftDesign
+                            // key={i}
+                            ticketId={prop.ticketId}
+                            name={prop.name}
+                            venue={prop.venue}
+                            date={prop.date}
+                            supply={prop.supply}
+                            remaining={prop.remaining}
+                            price={prop.price}
+                            // NftURI={nft.NftURI}
+                        />
+                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] " onClick={() => runEventCall(prop.tokenId)}>Run</button>
             </div>
         );
     }
 
-    if (loaded == false) return <div>Fetching..</div>;
+    if (loaded == false) return <div className="text-white">Fetching..</div>;
 
     if (loaded == true && pausedEvents.length == 0)
         return (
-            <div>
+            <div className="text-white">
                 PAUSED EVENTS <br /> No Events
             </div>
         );
 
     return (
-        <div>
+        <div >
             PAUSED EVENTS
             <div>
                 {pausedEvents.map((nft, i) => {

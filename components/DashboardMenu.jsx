@@ -3,6 +3,8 @@ import { NftCard, NftDesign } from "./icons/NftDesign";
 import { ActiveEvents } from "../components-functional/ActiveEvents";
 import { MintedCollection } from "../components-functional/MintedCollections";
 import DashboardForm from "./DashboardForm";
+import { PausedEvents } from "../components-functional/PausedEvents";
+import { ShortlistEvents } from "../components-functional/ShortlistEvents";
 const DashboardMenu = () => {
   const [open, setOpen] = useState(true);
   const [menuVisible, setmenuVisible] = useState("Dashboard")
@@ -28,13 +30,25 @@ const DashboardMenu = () => {
 
     )
   }
+  else if (menuVisible == "Pause") {
+    return(
+      <PausedEvents/>
+
+    )
+  }
+  else if (menuVisible == "Shortlist") {
+    return(
+      <ShortlistEvents/>
+
+    )
+  }
   
   }
   const Menus = [
     { title: "Dashboard", src: "Chart_fill" },
     { title: "Minited Collection", src: "Chat" },
     { title: "Active", src: "User", gap: true },
-    { title: "Pause ", src: "Calendar" },
+    { title: "Pause", src: "Calendar" },
     { title: "Shortlist", src: "Search" },
     { title: "Analytics", src: "Chart" },
     { title: "Files ", src: "Folder", gap: true },
@@ -94,7 +108,6 @@ const DashboardMenu = () => {
         {renderComponent()}
       
 
-        {/* // menuVisible == "Active" ?<ActiveEvents/>  : <div className="text-white">Dashboard</div>   */}
 
 
 

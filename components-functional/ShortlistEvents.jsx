@@ -39,11 +39,11 @@ export function ShortlistEvents() {
         );
     }
 
-    if (loaded == false) return <div>Fetching..</div>;
+    if (loaded == false) return <div className="text-white">Fetching..</div>;
 
     if (loaded == true && activeEvents.length == 0)
         return (
-            <div>
+            <div className="text-white">
                 SHORTLIST EVENTS <br /> No Events
             </div>
         );

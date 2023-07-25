@@ -2,7 +2,21 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchUsernameValidity, fetchInventory, buyTicket } from "../../../utils";
-
+import { NftDesign } from '../../../components/icons/NftDesign';
+import { Navbar } from '../../../components/Navbar';
+import Footer from '../../../components/Footer';
+import { textContainer, textVariant2 } from '../../../utils/motion';
+import { motion } from 'framer-motion';
+export const TitleText = ({ title, textStyles }) => (
+    <motion.h2
+      variants={textVariant2}
+      initial="hidden"
+      whileInView="show"
+      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+    >
+      {title}
+    </motion.h2>
+  );
 export default function Events() {
 
     const pathName = usePathname();
@@ -45,19 +59,28 @@ export default function Events() {
 
         return (
             <div className="text-black mb-5 mt-5">
-                <p>Nft card</p>
+                {/* <p>Nft card</p>
                 <p>Name: {prop.name}</p>
                 <p>Venue: {prop.venue}</p>
                 <p>Date: {prop.date}</p>
                 <p>Supply: {prop.supply}</p>
                 <p>Price: {prop.price}</p>
-                {/* <p>NftURI: {prop.NftUri}</p> */}
-                <button onClick={() => buyTicketCall(prop.ticketId, prop.price)}>Buy Ticket</button>
+                <p>NftURI: {prop.NftUri}</p> */}
+                <NftDesign
+                    name={prop.name}
+                    venue={prop.venue}
+                    date={prop.date}
+                    supply={prop.supply}
+                    price={prop.price}
+                    remaining={prop.remaining}
+                    
+                />
+                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[28px] "  onClick={() => buyTicketCall(prop.ticketId, prop.price)}>Buy Ticket</button>
             </div>
         );
     }
 
-    if (loaded == false) return <div>Fetching..</div>
+    if (loaded == false) return <div className='text-white'>Fetching..</div>
 
     if (loaded == true && isUsernameValid == false) return (
         <div>User do not exist</div>
@@ -69,7 +92,15 @@ export default function Events() {
 
     return(
         <div>
-            Tickets of {id}
+                       
+                      <Navbar/> 
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                        <TitleText title={<>Tickets of {id} </>} textStyles="text-center" />       
+
+            {/* Tickets of {id} */}
             <div>
             {purchasedTickets.map((nft, i) => {
                     return (
@@ -81,10 +112,12 @@ export default function Events() {
                             date={nft.date}
                             supply={nft.supply}
                             price={nft.price}
+                            remaining={nft.remaining}
                             // NftURI={nft.NftURI}
                         />
                     );
                 })}
+            
             </div>
         </div>
     )

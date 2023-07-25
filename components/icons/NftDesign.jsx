@@ -30,13 +30,13 @@ export const NftDesign = (props) => {
 
 <div className="overflow-hidden w-100vh">
 <div className="absolute z-[0] w-[40%] h-[35%] top-[20] pink__gradient" />
-<section className={` sm:p-16 xs:p-8 px-10 py-12 relative z-10 w-100vh`}>
-<motion.div className="flex md:flex-row flex-col gap-4" >
+<section className={` sm:p-16 xs:p-8 px-10 py-8 relative z-10 w-80vh`}>
+<motion.div className="flex md:flex-row flex-col gap-2" >
     
     
     <img
       src="/madlads.jpg"
-      className="md:w-[270px] w-full h-[250px] rounded-full object-cover"
+      className="md:w-[270px] w-full h-[250px] rounded-md object-cover"
     />
     <div className="w-full flex justify-between items-center">
     <div className="flex-1 md:ml-[62px] flex flex-col max-w-[650px]">
@@ -57,7 +57,7 @@ export const NftDesign = (props) => {
       
         </div>
         <div>
-        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">TICKET ID : {props.ticketId}</span>
+        <span class="tw-text-sm tw-whitespace-nowrap tw-text-white-2 text-white" title="FLOOR">VENUE : {props.venue}</span>
 
       
         </div>

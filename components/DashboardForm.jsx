@@ -81,10 +81,10 @@ const DashboardForm = () => {
 						</div>
 
 						<div class="mb-5">
-							<label for="email" class="font-bold mb-1 text-white block">Name</label>
+							<label for="email" class="font-bold mb-1 text-white block">Event Name</label>
 							<input type="email"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter your name..."/>
+								placeholder="Enter your wvent name..."/>
 						</div>
             <div class="mb-5">
 							<label for="firstname" class="font-bold mb-1 text-white block">Venue</label>

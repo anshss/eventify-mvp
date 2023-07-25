@@ -76,7 +76,7 @@ export default function Featured() {
             <br/>
             <br/>
             <br/>
-      <TitleText title={<>Featured Events</>} textStyles="text-center" />       
+      <TitleText title={<>Featured Requests</>} textStyles="text-center" />       
            <div>
                 {featuredRequest.map((nft, i) => {
                     return (
