@@ -1,28 +1,56 @@
 import React, { useState } from 'react';
+import { mint, uploadToIPFS } from "../utils";
 
 const DashboardForm = () => {
   const [step, setStep] = useState(1);
-  const [password, setPassword] = useState('');
-  const [togglePassword, setTogglePassword] = useState(false);
+
   const [image, setImage] = useState('');
 
-  const passwordStrengthText = getPasswordStrengthText();
+  const [formInput, setFormInput] = useState({
+    name: "",
+    venue: "",
+    date: "",
+    image: "",
+    price: "",
+    supply: "",
+    isPrivateEvent: false
+});
 
-  function getPasswordStrengthText() {
-    // Implement the logic to check the password strength and return a corresponding text.
-    // You can use the password state variable to check the password strength.
-    // Example: if (password meets certain criteria) return 'Strong password';
-  }
+async function formURI() {
+  const { name, venue, date, price, supply, image } = formInput
+  if (!name || !venue || !date || !price || !supply) return
+  const data = JSON.stringify({ name, venue, date, image })
+  const files = [new File([data], 'data.json')]
+  const metaCID = await uploadToIPFS(files)
+  const url = `https://ipfs.io/ipfs/${metaCID}/data.json`
+  console.log(url)
+  return url
+}
 
-  function handleFileChange(e) {
-    const file = e.target.files[0];
+async function onClickMint() {
+  const NftURI = await formURI()
+  await mint(formInput.price, formInput.supply, formInput.isPrivateEvent, NftURI)
+}
+
+  async function handleFileChange(e) {
+    const inputFile = e.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (event) => {
       setImage(event.target.result);
     };
+    reader.readAsDataURL(inputFile);
 
-    reader.readAsDataURL(file);
+    const inputFileName = e.target.files[0].name
+    const files = [new File([inputFile], inputFileName)]
+    const metaCID = await uploadToIPFS(files)
+    const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`
+    console.log(url)
+    setFormInput({
+      ...formInput,
+      image: url,
+  })
+
   }
 
   function handleNext() {
@@ -39,8 +67,9 @@ const DashboardForm = () => {
     }
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     // Implement the logic to submit the form data.
+    await onClickMint()
   }
 
   return (
@@ -52,7 +81,7 @@ const DashboardForm = () => {
           <div class="py-10">	
 						<div class="mb-5 text-center">
 							<div class="mx-auto w-32 h-32 mb-2 border rounded-full relative bg-gray-100 mb-4 shadow-inset">
-								<img id="image" class="object-cover w-full h-32 rounded-full"  />
+								<img id="image" src={image || "cat.gif"} class="object-cover w-full h-32 rounded-full"  />
 							</div>
 							
 							<label 
@@ -70,45 +99,93 @@ const DashboardForm = () => {
 
 							<div class="mx-auto w-48 text-gray-500 text-xs text-center mt-1">Click to add profile picture</div>
 
-							<input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" />
+							<input name="photo" id="fileInput" accept="image/*" class="hidden" type="file" onChange={handleFileChange}/>
 						</div>
 
 						<div class="mb-5">
-							<label for="firstname" class="font-bold mb-1 text-white block">Username</label>
+							{/* <label for="firstname" class="font-bold mb-1 text-white block">Username</label>
 							<input type="text"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter your firstname..."/>
+								placeholder="Enter your firstname..."
+                onChange={(e) =>
+                  setFormInput({
+                      ...formInput,
+                      name: e.target.value,
+                  })
+              }
+              value={formInput.name}
+              /> */}
 						</div>
 
 						<div class="mb-5">
 							<label for="email" class="font-bold mb-1 text-white block">Event Name</label>
 							<input type="email"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter your wvent name..."/>
+								placeholder="Enter your event name..."
+                onChange={(e) =>
+                  setFormInput({
+                      ...formInput,
+                      name: e.target.value,
+                  })
+              }
+              value={formInput.name}
+              />
 						</div>
             <div class="mb-5">
 							<label for="firstname" class="font-bold mb-1 text-white block">Venue</label>
 							<input type="text"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter your venue"/>
+								placeholder="Enter your venue"
+                onChange={(e) =>
+                  setFormInput({
+                      ...formInput,
+                      venue: e.target.value,
+                  })
+              }
+              value={formInput.venue}
+              />
 						</div>
             <div class="mb-5">
 							<label for="firstname" class="font-bold mb-1 text-white block">Date</label>
 							<input type="text"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter date"/>
+								placeholder="Enter date"
+                onChange={(e) =>
+                  setFormInput({
+                      ...formInput,
+                      date: e.target.value,
+                  })
+              }
+              value={formInput.date}
+              />
 						</div>
             <div class="mb-5">
 							<label for="firstname" class="font-bold mb-1 text-white block">Price</label>
 							<input type="text"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter date"/>
+								placeholder="Enter date"
+                onChange={(e) =>
+                  setFormInput({
+                      ...formInput,
+                      price: e.target.value,
+                  })
+              }
+              value={formInput.price}
+              />
 						</div>
             <div class="mb-5">
 							<label for="firstname" class="font-bold mb-1 text-white block">Supply</label>
 							<input type="text"
 								class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-								placeholder="Enter date"/>
+								placeholder="Enter supply"
+                onChange={(e) =>
+                  setFormInput({
+                      ...formInput,
+                      supply: e.target.value,
+                  })
+              }
+              value={formInput.supply}
+              />
 						</div>
 
 					</div>
