@@ -23,7 +23,7 @@ export const TypingText = ({ title, textStyles }) => (
       variants={textVariant2}
       initial="hidden"
       whileInView="show"
-      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+      className={`mt-[8px] font-bold md:text-[54px] text-[40px] text-white ${textStyles}`}
     >
       {title}
     </motion.h2>
@@ -40,11 +40,10 @@ const World = () => (
       className={`${styles.innerWidth} mx-auto flex flex-col`}
     >
 
-      <TypingText title="| People on the World" textStyles="text-center" />
+      <TypingText title="| Events around the world" textStyles="text-center" />
       <TitleText
         title={(
-          <>Track friends around you and invite them to play together in the same
-            world
+          <>Track events around you and join them with your friends
           </>
         )}
         textStyles="text-center"

@@ -16,7 +16,7 @@ const DashboardMenu = () => {
        <ActiveEvents/>
         )
     }
-  else if (menuVisible == "Minited Collection") {
+  else if (menuVisible == "Minted Collection") {
     return(
 
       <MintedCollection/>
@@ -24,7 +24,7 @@ const DashboardMenu = () => {
     
 
   }
-  else if (menuVisible == "Dashboard") {
+  else if (menuVisible == "Create Event") {
     return(
       <DashboardForm/>
 
@@ -45,8 +45,8 @@ const DashboardMenu = () => {
   
   }
   const Menus = [
-    { title: "Dashboard", src: "Chart_fill" },
-    { title: "Minited Collection", src: "Chat" },
+    { title: "Create Event", src: "Chart_fill" },
+    { title: "Minted Collection", src: "Chat" },
     { title: "Active", src: "User", gap: true },
     { title: "Pause", src: "Calendar" },
     { title: "Shortlist", src: "Search" },
