@@ -3,17 +3,24 @@ import { fetchActiveEvents, pauseEvent, raiseFeaturedEvents } from "../utils";
 import { NftDesign } from "../components/icons/NftDesign";
 import { textContainer, textVariant2 } from "../utils/motion";
 import { motion } from "framer-motion";
-export const TitleText = ({ title, textStyles }) => (
-    <motion.h2
-      variants={textVariant2}
-      initial="hidden"
-      whileInView="show"
-      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
-    >
-      {title}
-    </motion.h2>
-  );
-export const SubText = ({ title, textStyles }) => (
+function TitleText({ title, textStyles }) {
+    return (
+        <div>
+            <motion.h2
+                variants={textVariant2}
+                initial="hidden"
+                whileInView="show"
+                className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+            >
+                {title}
+            </motion.h2>
+        </div>
+    );
+}
+function SubText ({ title, textStyles }){
+    return(
+        <div>
+            
     <motion.h5
       variants={textVariant2}
       initial="hidden"
@@ -22,7 +29,10 @@ export const SubText = ({ title, textStyles }) => (
     >
       {title}
     </motion.h5>
-  );
+        </div>
+    )
+}
+  
 export function ActiveEvents() {
     const [activeEvents, setActiveEvents] = useState([]);
     const [loaded, setLoaded] = useState(false);
