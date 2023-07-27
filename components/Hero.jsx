@@ -61,7 +61,7 @@ const Hero = () => {
                             Seamless granular events hosting with NFT tickets.
                             <br className="sm:block hidden" />
                         </p>
-                        <p
+                        {/* <p
                             className={` max-w-[700px] text-[#ebe8ff] font-medium lg:text-[17px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] mt-2 text-white-100`}
                         >
                             Eventify utilizes NFTs to represent tickets,
@@ -72,7 +72,7 @@ const Hero = () => {
                             can be easily verified, preventing counterfeiting
                             and ensuring that only valid tickets are bought and
                             sold.
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </div>

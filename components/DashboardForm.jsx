@@ -197,7 +197,7 @@ const DashboardForm = () => {
                                 Date
                             </label>
                             <input
-                                type="text"
+                                type="date"
                                 class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
                                 placeholder="Enter date"
                                 onChange={(e) =>
@@ -219,7 +219,7 @@ const DashboardForm = () => {
                             <input
                                 type="text"
                                 class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                                placeholder="Enter date"
+                                placeholder="Enter Price(MATIC)"
                                 onChange={(e) =>
                                     setFormInput({
                                         ...formInput,

@@ -37,7 +37,7 @@ export default function Dashboard() {
         setUsername(data);
     }
 
-    if (loaded == false) return <div>Fetching...</div>;
+    if (loaded == false) return <div className="text-white">Fetching...</div>;
 
     if (!isDeployed)
         return (

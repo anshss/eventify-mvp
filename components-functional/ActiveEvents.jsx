@@ -1,7 +1,28 @@
 import { useEffect, useState } from "react";
 import { fetchActiveEvents, pauseEvent, raiseFeaturedEvents } from "../utils";
 import { NftDesign } from "../components/icons/NftDesign";
-
+import { textContainer, textVariant2 } from "../utils/motion";
+import { motion } from "framer-motion";
+export const TitleText = ({ title, textStyles }) => (
+    <motion.h2
+      variants={textVariant2}
+      initial="hidden"
+      whileInView="show"
+      className={`mt-[8px] font-bold md:text-[64px] text-[40px] text-white ${textStyles}`}
+    >
+      {title}
+    </motion.h2>
+  );
+export const SubText = ({ title, textStyles }) => (
+    <motion.h5
+      variants={textVariant2}
+      initial="hidden"
+      whileInView="show"
+      className={`mt-[8px] font-bold md:text-[24px] text-[20px] text-white ${textStyles}`}
+    >
+      {title}
+    </motion.h5>
+  );
 export function ActiveEvents() {
     const [activeEvents, setActiveEvents] = useState([]);
     const [loaded, setLoaded] = useState(false);
@@ -59,7 +80,12 @@ export function ActiveEvents() {
     if (loaded == true && activeEvents.length == 0)
         return (
             <div>
-                ACTIVE EVENTS <br /> No Events
+                <TitleText
+                    title={<>Active Events </>}
+                    textStyles="text-center"
+                />
+                {/* PURCHASED TICKETS */}
+                <SubText title={<>No events </>} textStyles="text-center" />
             </div>
         );
 
