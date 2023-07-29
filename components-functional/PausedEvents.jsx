@@ -73,7 +73,7 @@ export function PausedEvents() {
                 />
                 <button
                     className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] "
-                    onClick={() => runEventCall(prop.tokenId)}
+                    onClick={() => runEventCall(prop.ticketId)}
                 >
                     Run
                 </button>

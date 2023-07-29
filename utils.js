@@ -333,7 +333,7 @@ export async function fetchMintedCollection() {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                tokenId: i.ticketId.toString(),
+                ticketId: i.ticketId.toString(),
                 host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,
@@ -432,7 +432,7 @@ export async function fetchPausedEvents() {
             const meta = await axios.get(tokenUri);
             let price = ethers.utils.formatEther(i.price);
             let item = {
-                tokenId: i.ticketId.toString(),
+                ticketId: i.ticketId.toString(),
                 host: i.host,
                 name: meta.data.name,
                 venue: meta.data.venue,

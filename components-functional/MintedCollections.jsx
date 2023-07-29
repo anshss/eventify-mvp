@@ -17,20 +17,19 @@ function TitleText({ title, textStyles }) {
         </div>
     );
 }
-function SubText ({ title, textStyles }){
-    return(
+function SubText({ title, textStyles }) {
+    return (
         <div>
-            
-    <motion.h5
-      variants={textVariant2}
-      initial="hidden"
-      whileInView="show"
-      className={`mt-[8px] font-bold md:text-[24px] text-[20px] text-white ${textStyles}`}
-    >
-      {title}
-    </motion.h5>
+            <motion.h5
+                variants={textVariant2}
+                initial="hidden"
+                whileInView="show"
+                className={`mt-[8px] font-bold md:text-[24px] text-[20px] text-white ${textStyles}`}
+            >
+                {title}
+            </motion.h5>
         </div>
-    )
+    );
 }
 
 export function MintedCollection() {
@@ -49,6 +48,7 @@ export function MintedCollection() {
 
     function NFTCard(prop) {
         async function publishTicketsCall(ticketId) {
+            // console.log(ticketId);
             await publishTickets(ticketId);
         }
 
@@ -71,7 +71,10 @@ export function MintedCollection() {
                     image={prop.image}
                     eventType={prop.eventType}
                 />
-                <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] " onClick={() => publishTicketsCall(prop.tokenId)}>
+                <button
+                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-[100px] py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ml-[250px] "
+                    onClick={() => publishTicketsCall(prop.ticketId)}
+                >
                     Publish
                 </button>
             </div>
@@ -83,7 +86,7 @@ export function MintedCollection() {
     if (loaded == true && mintedCollection.length == 0)
         return (
             <div className="text-white">
-  <TitleText
+                <TitleText
                     title={<>Minited Collections </>}
                     textStyles="text-center"
                 />
@@ -98,6 +101,7 @@ export function MintedCollection() {
             MINTED COLLECTION
             <div>
                 {mintedCollection.map((nft, i) => {
+                {console.log(nft.ticketId)}
                     return (
                         <NFTCard
                             key={i}
